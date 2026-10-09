@@ -1,0 +1,367 @@
+﻿<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10120f" />
+    <meta name="description" content="Portofolio digital dengan keyboard 3D interaktif." />
+    <title>ZULFAHMI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="technologies.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="wordmark" href="#home" aria-label="ZULFAHMI, beranda">ZULFAHMI</a>
+      <nav aria-label="Navigasi utama">
+        <a class="nav-link active" href="#home"><span>01</span> Beranda</a>
+        <a class="nav-link" href="#about"><span>02</span> Tentang</a>
+        <a class="nav-link" href="#stack"><span>03</span> Teknologi</a>
+        <a class="nav-link" href="mailto:halo@ruangkarya.dev"><span>04</span> Kontak</a>
+      </nav>
+      <a class="availability" href="mailto:halo@ruangkarya.dev"><span class="availability-dot"></span> TERBUKA UNTUK KOLABORASI</a>
+    </header>
+
+    <main id="home">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> PORTOFOLIO DIGITAL Â· 2025â€”26</div>
+          <h1 id="hero-title">Dari ide,<br /><span class="headline-accent">jadi nyata.</span></h1>
+          <p class="intro">Halo, saya <strong>Zulfahmi</strong>, seorang <strong>Full Stack Developer</strong> yang senang mengubah ide menjadi website dan aplikasi yang interaktif, fungsional, dan bermakna.</p>
+          <p class="intro">Saya membangun pengalaman digital dari antarmuka hingga sistem di baliknya, dengan menggabungkan teknologi, kreativitas, dan solusi yang tepat guna.</p>
+          <a class="work-link" href="#about"><span class="arrow-circle" aria-hidden="true">&#8600;</span><span>Lihat cara saya berkarya</span></a>
+          <div class="hero-index"><span>01</span><span class="index-rule"></span><span>INTRODUKSI</span></div>
+        </div>
+
+        <div class="showcase">
+          <div class="showcase-heading"><span class="section-label">TECH STACK</span><span class="hint"><span class="hint-dot"></span> ARAHKAN KURSOR KE LOGO</span></div>
+          <div class="keyboard-stage-slot" id="keyboard-stage-slot">
+            <div class="keyboard-stage" id="keyboard-stage" aria-label="Keyboard gaming 3D buatan sendiri" aria-busy="true">
+              <canvas id="keyboard-canvas" aria-label="Keyboard 3D interaktif; arahkan kursor ke tombol berlogo teknologi" aria-hidden="true"></canvas>
+              <div class="keyboard-fallback" id="keyboard-fallback" aria-label="Keyboard compact 3D interaktif" aria-hidden="true" inert></div>
+              <div class="canvas-loading" id="canvas-loading" role="status"><span class="loading-dot"></span> MERAKIT KEYBOARD 3D</div>
+              <article class="tech-card" id="tech-card" aria-live="polite">
+                <div class="card-topline"><span class="card-kicker">SEDANG DIPILIH</span><span class="card-number" id="tech-number">01 / 18</span></div>
+                <div class="tech-main"><div class="tech-icon" id="tech-icon"></div><div><h2 id="tech-name">Supabase</h2><p id="tech-category">BACKEND AS A SERVICE</p></div></div>
+                <p class="tech-description" id="tech-description">Membangun backend aplikasi dengan database, autentikasi, dan layanan Supabase.</p>
+                <div class="card-bottom"><span class="level-label">STATUS</span><span class="level-value" id="tech-level">DIKUASAI</span></div>
+                <div class="level-track"><span id="level-fill"></span></div>
+              </article>
+            </div>
+          </div>
+          <div class="showcase-foot"><span>18 TEKNOLOGI Â· SATU ALUR KERJA</span><span class="foot-coordinates">06Â°12' S &nbsp; 106Â°49' E</span></div>
+        </div>
+      </section>
+      <div class="bottom-strip"><span>DESAIN DENGAN RASA. DIBANGUN DENGAN TUJUAN.</span><span class="strip-center">JAKARTA, INDONESIA <span class="strip-dot">&#9679;</span> <span id="local-time">--:--:-- WIB</span></span><a class="section-scroll" href="#about">KENALI SAYA <span class="down-arrow" aria-hidden="true">&#8595;</span></a></div>
+
+      <section class="about-section" id="about" aria-labelledby="about-title">
+        <div class="about-inner">
+          <div class="about-section-heading">
+            <p class="about-eyebrow" id="about-title"><span>02</span> TENTANG SAYA</p>
+            <span class="about-section-note">WEB &nbsp;/&nbsp; BACKEND &nbsp;/&nbsp; MOBILE</span>
+          </div>
+          <div class="about-grid">
+            <div class="about-workspace-description" lang="id">
+              <p><strong>Setiap proyek, perspektif baru.</strong></p>
+              <p>Saya menikmati proses memahami masalah, mengeksplorasi ide, dan menemukan pendekatan yang tepat. Pengalaman saya mencakup platform e-commerce, kios interaktif berbasis gestur, hingga website komunitas.</p>
+              <p><strong>E-COMMERCE &nbsp;&middot;&nbsp; INTERACTIVE KIOSK &nbsp;&middot;&nbsp; COMMUNITY WEB</strong></p>
+            </div>
+            <div class="about-expertise" data-expertise>
+              <div class="about-expertise-heading"><span>FOKUS PENGEMBANGAN</span><span aria-hidden="true">&lt;/&gt;</span></div>
+              <div class="about-tabs" role="tablist" aria-label="Bidang pengembangan" hidden>
+                <button class="about-tab" type="button" role="tab" id="about-web-tab" aria-controls="about-web" aria-selected="true">Web<span aria-hidden="true">01</span></button>
+                <button class="about-tab" type="button" role="tab" id="about-backend-tab" aria-controls="about-backend" aria-selected="false" tabindex="-1">Backend<span aria-hidden="true">02</span></button>
+                <button class="about-tab" type="button" role="tab" id="about-mobile-tab" aria-controls="about-mobile" aria-selected="false" tabindex="-1">Mobile<span aria-hidden="true">03</span></button>
+              </div>
+
+              <div class="about-panel" id="about-web">
+                <div class="about-field-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><rect x="5" y="8" width="38" height="31" rx="4"/><path d="M5 17h38M11 12.5h1m4 0h1M21 24l-5 4 5 4m7-8 5 4-5 4"/></svg></div>
+                <h3>Nyaman di setiap layar.</h3>
+                <p>Membangun antarmuka web yang responsif dan interaktif, dengan komponen yang terstruktur untuk kebutuhan aplikasi.</p>
+                <ul class="about-tech-list" aria-label="Teknologi web">
+                  <li><img src="assets/tech-stack/react.svg" width="18" height="18" alt="" loading="lazy" />React</li>
+                  <li><img src="assets/tech-stack/nextjs.svg" width="18" height="18" alt="" loading="lazy" />Next.js</li>
+                  <li><img src="assets/tech-stack/typescript.svg" width="18" height="18" alt="" loading="lazy" />TypeScript</li>
+                  <li><img src="assets/tech-stack/tailwindcss.svg" width="18" height="18" alt="" loading="lazy" />Tailwind CSS</li>
+                </ul>
+                <p class="about-focus-note">ANTARMUKA &nbsp;&middot;&nbsp; KOMPONEN &nbsp;&middot;&nbsp; INTERAKSI</p>
+              </div>
+
+              <div class="about-panel" id="about-backend">
+                <div class="about-field-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="10" rx="16" ry="6"/><path d="M8 10v25c0 3.3 7.2 6 16 6s16-2.7 16-6V10M8 22c0 3.3 7.2 6 16 6s16-2.7 16-6"/></svg></div>
+                <h3>Logika di balik pengalaman.</h3>
+                <p>Mengembangkan API, autentikasi, dan pengelolaan data agar antarmuka terhubung dengan layanan yang dibutuhkan aplikasi.</p>
+                <ul class="about-tech-list" aria-label="Teknologi backend">
+                  <li><img src="assets/tech-stack/laravel.svg" width="18" height="18" alt="" loading="lazy" />Laravel</li>
+                  <li><img src="assets/tech-stack/nodejs.svg" width="18" height="18" alt="" loading="lazy" />Node.js</li>
+                  <li><img src="assets/tech-stack/express.svg" width="18" height="18" alt="" loading="lazy" />Express.js</li>
+                  <li><img src="assets/tech-stack/mysql.svg" width="18" height="18" alt="" loading="lazy" />MySQL</li>
+                  <li><img src="assets/tech-stack/supabase.svg" width="18" height="18" alt="" loading="lazy" />Supabase</li>
+                </ul>
+                <p class="about-focus-note">API &nbsp;&middot;&nbsp; AUTENTIKASI &nbsp;&middot;&nbsp; DATABASE</p>
+              </div>
+
+              <div class="about-panel" id="about-mobile">
+                <div class="about-field-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><rect x="13" y="4" width="22" height="40" rx="5"/><path d="M20 9h8m-8 29h8M19 23l4 4 7-8"/></svg></div>
+                <h3>Hadir dalam genggaman.</h3>
+                <p>Mengembangkan aplikasi mobile lintas platform dengan Flutter dan Dart, dari tampilan hingga integrasi dengan backend.</p>
+                <ul class="about-tech-list" aria-label="Teknologi mobile">
+                  <li><img src="assets/tech-stack/flutter.svg" width="18" height="18" alt="" loading="lazy" />Flutter</li>
+                  <li><img src="assets/tech-stack/dart.svg" width="18" height="18" alt="" loading="lazy" />Dart</li>
+                </ul>
+                <p class="about-focus-note">LINTAS PLATFORM &nbsp;&middot;&nbsp; UI &nbsp;&middot;&nbsp; INTEGRASI API</p>
+              </div>
+              <a class="about-stack-link" href="#stack">Jelajahi tech stack <span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="technologies-section technology-catalog-hidden" id="stack" aria-labelledby="technologies-title">
+        <div class="technologies-inner">
+          <div class="technologies-heading">
+            <p class="about-eyebrow"><span>03</span> TEKNOLOGI</p>
+            <span class="technologies-note">PERANGKAT DI BALIK PROSES</span>
+          </div>
+          <div class="technologies-intro">
+            <h2 id="technologies-title">Teknologi di balik<br /><span>setiap karya.</span></h2>
+            <div class="technologies-summary">
+              <p>Setiap ide membutuhkan pendekatan yang tepat. Ini adalah teknologi yang saya gunakan untuk membangun antarmuka, mengolah data, dan membawa aplikasi sampai ke tangan pengguna.</p>
+              <span class="technologies-total"><strong>18</strong> TEKNOLOGI &nbsp;&middot;&nbsp; SATU ALUR KERJA</span>
+            </div>
+          </div>
+          <div class="technology-monitor-dock" id="technology-monitor-dock" aria-hidden="true"></div>
+          <div class="monitor-portal-journey" id="monitor-portal-journey">
+            <section class="monitor-portal-page" id="monitor-portal-page" aria-label="Halaman teknologi di dalam monitor" aria-hidden="true" inert>
+              <div class="monitor-portal-content">
+                <div class="monitor-portal-topline"><span>ZULFAHMI &nbsp;/&nbsp; TECHNOLOGY STACK</span><span>&lt;/&gt;</span></div>
+                <div class="monitor-portal-intro">
+                  <div class="monitor-portal-heading">
+                    <h2>Teknologi yang dikuasai</h2>
+                    <p>TOOLS UNTUK MEMBANGUN IDE MENJADI NYATA</p>
+                  </div>
+                  <div class="monitor-portal-categories" aria-label="Kategori teknologi">
+                    <div class="monitor-portal-category"><span>01 / 05</span><strong>FRONTEND</strong><small>Antarmuka dan interaksi</small></div>
+                    <div class="monitor-portal-category"><span>02 / 05</span><strong>BACKEND</strong><small>Data dan layanan</small></div>
+                    <div class="monitor-portal-category"><span>03 / 02</span><strong>MOBILE</strong><small>Aplikasi lintas platform</small></div>
+                    <div class="monitor-portal-category"><span>04 / 06</span><strong>TOOLS</strong><small>Alur kerja dan deployment</small></div>
+                  </div>
+                </div>
+                <div class="monitor-portal-marquee" aria-label="Logo teknologi yang dikuasai">
+                  <div class="monitor-portal-track" id="monitor-portal-track"></div>
+                </div>
+                <p class="monitor-portal-domains" aria-label="Web, Backend, Mobile, Deployment">
+                  <span>WEB</span><span aria-hidden="true">·</span><span>BACKEND</span><span aria-hidden="true">·</span><span>MOBILE</span><span aria-hidden="true">·</span><span>DEPLOYMENT</span>
+                </p>
+                <div class="monitor-portal-bottom">
+                  <div class="monitor-portal-approach">
+                    <p class="monitor-portal-approach-kicker">PENDEKATAN SAYA — 01</p>
+                    <h3>Bukan soal banyaknya tools.<br />Tapi bagaimana menggunakannya.</h3>
+                    <p>Setiap proyek memiliki kebutuhan yang berbeda. Saya memilih teknologi yang paling relevan dengan mempertimbangkan performa, pengalaman pengguna, dan kemudahan pengembangan.</p>
+                  </div>
+                  <aside class="monitor-portal-detail" id="monitor-portal-detail" aria-label="Informasi teknologi" aria-live="polite" hidden>
+                    <p class="monitor-portal-detail-kicker">INFORMASI TEKNOLOGI</p>
+                    <div class="monitor-portal-detail-heading">
+                      <span class="monitor-portal-detail-icon"><img id="monitor-portal-detail-image" width="40" height="40" alt="" /></span>
+                      <div><p id="monitor-portal-detail-category"></p><h3 id="monitor-portal-detail-name"></h3></div>
+                    </div>
+                    <p class="monitor-portal-detail-role" id="monitor-portal-detail-role"></p>
+                    <p class="monitor-portal-detail-description" id="monitor-portal-detail-description"></p>
+                  </aside>
+                </div>
+              </div>
+            </section>
+            <section class="experience-page" id="experience-projects" aria-labelledby="experience-title" aria-hidden="true" inert>
+              <div class="experience-content">
+                <div class="experience-topline"><span>ZULFAHMI &nbsp;/&nbsp; PENGALAMAN &amp; PROYEK</span><span>04 / PORTFOLIO</span></div>
+                <div class="experience-intro">
+                  <div>
+                    <p class="experience-kicker">PENGALAMAN YANG MEMBENTUK KARYA</p>
+                    <h2 id="experience-title">Dari tantangan<br /><span>menjadi karya.</span></h2>
+                  </div>
+                  <p>Setiap proyek memberi perspektif baru: memahami kebutuhan, mengeksplorasi ide, lalu membangun solusi yang dapat digunakan.</p>
+                </div>
+                <div class="experience-projects" aria-label="Proyek yang pernah dikerjakan">
+                  <article class="experience-project">
+                    <div class="experience-project-meta"><span>01 / WEB</span></div>
+                    <div><p class="experience-project-type">PLATFORM DIGITAL</p><h3>Platform e-commerce</h3><p>Membangun pengalaman belanja berbasis web dengan alur yang jelas dan mudah digunakan.</p></div>
+                    <span class="experience-project-index" aria-hidden="true">01</span>
+                  </article>
+                  <article class="experience-project">
+                    <div class="experience-project-meta"><span>02 / INTERAKTIF</span></div>
+                    <div><p class="experience-project-type">INTERAKSI PENGGUNA</p><h3>Kios berbasis gestur</h3><p>Mengeksplorasi interaksi layar melalui gerakan pengguna untuk pengalaman yang lebih imersif.</p></div>
+                    <span class="experience-project-index" aria-hidden="true">02</span>
+                  </article>
+                  <article class="experience-project">
+                    <div class="experience-project-meta"><span>03 / KOMUNITAS</span></div>
+                    <div><p class="experience-project-type">RUANG DIGITAL</p><h3>Website komunitas</h3><p>Menyediakan ruang untuk informasi, aktivitas, dan keterhubungan antaranggota komunitas.</p></div>
+                    <span class="experience-project-index" aria-hidden="true">03</span>
+                  </article>
+                </div>
+                <p class="experience-footnote">E-COMMERCE <span>·</span> INTERACTIVE KIOSK <span>·</span> COMMUNITY WEB</p>
+              </div>
+            </section>
+          </div>
+          <div class="technologies-toolbar">
+            <div class="technology-filters" role="group" aria-label="Filter kategori teknologi" hidden>
+              <button type="button" class="technology-filter is-active" data-filter="all" aria-pressed="true" aria-controls="technology-list">Semua <span>18</span></button>
+              <button type="button" class="technology-filter" data-filter="frontend" aria-pressed="false" aria-controls="technology-list">Frontend <span>05</span></button>
+              <button type="button" class="technology-filter" data-filter="backend" aria-pressed="false" aria-controls="technology-list">Backend <span>05</span></button>
+              <button type="button" class="technology-filter" data-filter="mobile" aria-pressed="false" aria-controls="technology-list">Mobile <span>02</span></button>
+              <button type="button" class="technology-filter" data-filter="tools" aria-pressed="false" aria-controls="technology-list">Tools <span>06</span></button>
+            </div>
+            <p class="technology-results" role="status" aria-live="polite" aria-atomic="true">18 teknologi ditampilkan</p>
+          </div>
+          <div class="technologies-workspace">
+          <ul class="technology-list" id="technology-list" aria-label="Daftar teknologi">
+            <li class="technology-item" data-category="frontend">
+              <button class="technology-card" type="button" data-name="React" data-role="Antarmuka berbasis komponen" data-description="Membangun antarmuka interaktif dengan komponen yang dapat digunakan kembali." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/react.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">React</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="frontend">
+              <button class="technology-card" type="button" data-name="Next.js" data-role="Framework web" data-description="Mengembangkan aplikasi web dengan routing, rendering, dan struktur yang terintegrasi." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/nextjs.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Next.js</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="frontend">
+              <button class="technology-card" type="button" data-name="TypeScript" data-role="JavaScript dengan tipe" data-description="Menjaga alur data dan kode lebih jelas melalui pemeriksaan tipe." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/typescript.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">TypeScript</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="frontend">
+              <button class="technology-card" type="button" data-name="JavaScript" data-role="Interaksi &amp; logika" data-description="Menghidupkan interaksi dan menjalankan logika aplikasi di browser maupun server." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/javascript.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">JavaScript</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="frontend">
+              <button class="technology-card" type="button" data-name="Tailwind CSS" data-role="Styling antarmuka" data-description="Menyusun tampilan responsif dan konsisten menggunakan utility classes." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/tailwindcss.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Tailwind CSS</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="backend">
+              <button class="technology-card" type="button" data-name="Laravel" data-role="Framework backend" data-description="Membangun layanan aplikasi, autentikasi, dan pengelolaan data." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/laravel.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Laravel</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="backend">
+              <button class="technology-card" type="button" data-name="Node.js" data-role="JavaScript di server" data-description="Menjalankan logika server dan menghubungkan aplikasi dengan layanan lain." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/nodejs.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Node.js</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="backend">
+              <button class="technology-card" type="button" data-name="Express.js" data-role="API &amp; routing" data-description="Menyusun endpoint API, middleware, dan alur request pada server." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/express.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Express.js</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="backend">
+              <button class="technology-card" type="button" data-name="MySQL" data-role="Database relasional" data-description="Menata data, relasi, dan query untuk kebutuhan aplikasi." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/mysql.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">MySQL</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="backend">
+              <button class="technology-card" type="button" data-name="Supabase" data-role="Layanan backend" data-description="Mengintegrasikan database, autentikasi, dan penyimpanan dalam aplikasi." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/supabase.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Supabase</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="mobile">
+              <button class="technology-card" type="button" data-name="Flutter" data-role="Aplikasi lintas platform" data-description="Membangun pengalaman mobile dengan antarmuka yang konsisten." data-category-label="MOBILE" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/flutter.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Flutter</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="mobile">
+              <button class="technology-card" type="button" data-name="Dart" data-role="Bahasa untuk Flutter" data-description="Menyusun logika, state, dan interaksi dalam aplikasi Flutter." data-category-label="MOBILE" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/dart.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Dart</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="tools">
+              <button class="technology-card" type="button" data-name="Git" data-role="Kontrol versi" data-description="Melacak perubahan kode dan mengelola pekerjaan dalam beberapa branch." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/git.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Git</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="tools">
+              <button class="technology-card" type="button" data-name="GitHub" data-role="Kolaborasi kode" data-description="Mengelola repository dan berkolaborasi dalam pengembangan proyek." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/github.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">GitHub</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="tools">
+              <button class="technology-card" type="button" data-name="Postman" data-role="Pengujian API" data-description="Mengeksplorasi endpoint serta memeriksa request dan response API." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/postman.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Postman</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="tools">
+              <button class="technology-card" type="button" data-name="Laragon" data-role="Lingkungan lokal" data-description="Menyiapkan lingkungan pengembangan dan menjalankan aplikasi secara lokal." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/laragon.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Laragon</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="tools">
+              <button class="technology-card" type="button" data-name="Cloudflare Pages" data-role="Publikasi website" data-description="Mempublikasikan website dan aplikasi web agar dapat diakses pengguna." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/cloudflarepages.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Cloudflare Pages</span>
+              </button>
+            </li>
+            <li class="technology-item" data-category="tools">
+              <button class="technology-card" type="button" data-name="Vercel" data-role="Deployment aplikasi" data-description="Menerbitkan aplikasi web dan meninjau perubahan melalui preview deployment." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+                <span class="technology-logo"><img src="assets/tech-stack/vercel.svg" width="24" height="24" alt="" loading="lazy" /></span>
+                <span class="technology-name">Vercel</span>
+              </button>
+            </li>
+          </ul>
+            <aside class="technology-detail" id="technology-detail" aria-label="Informasi teknologi">
+              <p class="technology-detail-kicker">KENALI TEKNOLOGINYA</p>
+              <div class="technology-detail-empty">
+                <span class="technology-detail-symbol" aria-hidden="true">&lt;/&gt;</span>
+                <h3>Di balik setiap karya.</h3>
+                <p>Arahkan kursor atau klik salah satu teknologi untuk melihat penggunaannya.</p>
+              </div>
+              <div class="technology-detail-content" hidden>
+                <div class="technology-detail-heading">
+                  <span class="technology-logo technology-detail-logo"><img id="technology-detail-icon" width="36" height="36" alt="" /></span>
+                  <div>
+                    <p id="technology-detail-category"></p>
+                    <h3 id="technology-detail-name"></h3>
+                  </div>
+                </div>
+                <p class="technology-detail-role" id="technology-detail-role"></p>
+                <p class="technology-detail-description" id="technology-detail-description"></p>
+                <div class="technology-detail-foot"><span>PENGGUNAAN DALAM PROYEK</span><span aria-hidden="true">&#8599;</span></div>
+              </div>
+              <span class="technology-selection-status" role="status" aria-live="polite" aria-atomic="true"></span>
+            </aside>
+          </div>
+          <div class="technologies-footer">
+            <p>Terus belajar. Terus mencoba. Terus berkarya.</p>
+            <a href="mailto:halo@ruangkarya.dev">Mari berkolaborasi <span aria-hidden="true">&#8599;</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="about.js"></script>
+    <script src="technologies.js"></script>
+    <script src="tech-logos.js"></script>
+    <script src="keyboard-audio.js"></script>
+    <script src="fallback.js"></script>
+    <script src="vendor/three-0.166.1.js"></script>
+    <script src="script.js"></script>
+    <script src="scroll-motion.js"></script>
+  </body>
+</html>

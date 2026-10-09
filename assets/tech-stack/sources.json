@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Supabase",
+    "file": "supabase.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/supabase/supabase-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "MySQL",
+    "file": "mysql.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/mysql/mysql-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "React",
+    "file": "react.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/react/react-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Next.js",
+    "file": "nextjs.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/nextjs/nextjs-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "TypeScript",
+    "file": "typescript.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/typescript/typescript-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "JavaScript",
+    "file": "javascript.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/javascript/javascript-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Tailwind CSS",
+    "file": "tailwindcss.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/tailwindcss/tailwindcss-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Flutter",
+    "file": "flutter.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/flutter/flutter-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Dart",
+    "file": "dart.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/dart/dart-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Laravel",
+    "file": "laravel.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/laravel/laravel-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Node.js",
+    "file": "nodejs.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/nodejs/nodejs-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Express.js",
+    "file": "express.svg",
+    "source": "https://expressjs.com/favicon.svg",
+    "collection": "Official brand website",
+    "revision": null,
+    "changes": "None"
+  },
+  {
+    "name": "Cloudflare Pages",
+    "file": "cloudflarepages.svg",
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/98820a4dc8c363ca72fa2c0d294ea4a0a9bba75d/icons/cloudflarepages.svg",
+    "collection": "Simple Icons",
+    "revision": "98820a4dc8c363ca72fa2c0d294ea4a0a9bba75d",
+    "changes": "Added the Cloudflare brand color #F38020 to the monochrome SVG."
+  },
+  {
+    "name": "Vercel",
+    "file": "vercel.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/vercel/vercel-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Git",
+    "file": "git.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/git/git-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "GitHub",
+    "file": "github.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/github/github-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Postman",
+    "file": "postman.svg",
+    "source": "https://raw.githubusercontent.com/devicons/devicon/7330accdbc47e2dc0c19789a48533c4a3c50fe58/icons/postman/postman-original.svg",
+    "collection": "Devicon",
+    "revision": "7330accdbc47e2dc0c19789a48533c4a3c50fe58",
+    "changes": "None"
+  },
+  {
+    "name": "Laragon",
+    "file": "laragon.svg",
+    "source": "https://laragon.org/logo.svg",
+    "collection": "Official brand website",
+    "revision": null,
+    "changes": "None"
+  }
+]
