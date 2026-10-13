@@ -22,7 +22,7 @@
   const copyBtn = document.getElementById("copy-email-btn");
   if (copyBtn) {
     copyBtn.addEventListener("click", async () => {
-      const email = "halo@ruangkarya.dev";
+      const email = "fahmif3211@gmail.com";
       try {
         await navigator.clipboard.writeText(email);
         const originalText = copyBtn.innerHTML;
@@ -56,7 +56,7 @@
       const body = encodeURIComponent(
         `Halo Zulfahmi,\n\nNama: ${name}\nEmail: ${email}\nLayanan: ${service}\n\nPesan:\n${message}\n\n---\nDikirim melalui formulir portofolio`
       );
-      const mailtoUrl = `mailto:halo@ruangkarya.dev?subject=${subject}&body=${body}`;
+      const mailtoUrl = `mailto:fahmif3211@gmail.com?subject=${subject}&body=${body}`;
 
       if (formFeedback) {
         formFeedback.hidden = false;
