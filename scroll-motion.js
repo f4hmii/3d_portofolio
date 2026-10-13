@@ -46,11 +46,17 @@
       monitorPage.style.removeProperty("opacity");
       monitorPage.style.removeProperty("pointer-events");
       monitorPage.style.removeProperty("transform");
+      monitorPage.style.removeProperty("border-radius");
+      monitorPage.style.removeProperty("border");
+      monitorPage.style.removeProperty("box-shadow");
+      monitorPage.style.removeProperty("visibility");
+      monitorPage.style.removeProperty("--monitor-bezel-indicator");
       monitorPage.inert = false;
       monitorPage.setAttribute("aria-hidden", "false");
       experiencePage.style.removeProperty("opacity");
       experiencePage.style.removeProperty("pointer-events");
       experiencePage.style.removeProperty("transform");
+      experiencePage.style.removeProperty("visibility");
       experiencePage.inert = false;
       experiencePage.setAttribute("aria-hidden", "false");
       aboutGrid.style.removeProperty("--about-workspace-height");
@@ -78,7 +84,6 @@
     const experienceStart = journeyTop + window.innerHeight * 1.08;
     const experienceEnd = journeyTop + window.innerHeight * 1.95;
     const experienceProgress = smooth(clamp((scrollY - experienceStart) / (experienceEnd - experienceStart), 0, 1));
-    const portalExit = smooth(clamp((experienceProgress - 0.48) / 0.52, 0, 1));
     const source = slot.getBoundingClientRect();
     const aboutRect = about.getBoundingClientRect();
     const aboutSectionProgress = clamp(-aboutRect.top / Math.max(1, aboutRect.height), 0, 1);
@@ -142,15 +147,50 @@
     stage.style.transform = `scale(${scale})`;
     stage.style.opacity = String(1 - pageReveal);
     stage.style.visibility = monitorZoomProgress >= 0.98 ? "hidden" : "visible";
-    monitorPage.style.opacity = String(pageReveal * (1 - portalExit));
-    monitorPage.style.transform = `translate3d(${-75 * experienceProgress}vw, 0, 0) scale(${1 - 0.32 * experienceProgress})`;
-    monitorPage.style.pointerEvents = monitorZoomProgress >= 0.98 && experienceProgress < 0.82 ? "auto" : "none";
-    monitorPage.inert = monitorZoomProgress < 0.98 || experienceProgress >= 0.82;
+    // Monitor exit (zoom-out from monitor screen into workspace)
+    const monitorExitScale = 1 - (isCompact ? 0.46 : 0.54) * experienceProgress;
+    const monitorExitY = -35 * experienceProgress;
+    const monitorExitRotateX = -5.5 * experienceProgress;
+    const monitorExitFade = smooth(clamp((experienceProgress - 0.52) / 0.44, 0, 1));
+    const monitorBezelProgress = smooth(clamp(experienceProgress / 0.32, 0, 1));
+
+    if (experienceProgress > 0.002) {
+      const bezelRadius = Math.round(monitorBezelProgress * (isCompact ? 16 : 28));
+      const bezelBorder = Math.round(monitorBezelProgress * (isCompact ? 7 : 14));
+      const outerRim = Math.round(bezelBorder + monitorBezelProgress * (isCompact ? 4 : 8));
+      const shadowY = Math.round(monitorBezelProgress * 32);
+      const shadowBlur = Math.round(monitorBezelProgress * 75);
+      const shadowSpread = Math.round(monitorBezelProgress * 8);
+      const glowBlur = Math.round(monitorBezelProgress * 55);
+
+      monitorPage.style.borderRadius = `${bezelRadius}px`;
+      monitorPage.style.border = `${bezelBorder}px solid #161b14`;
+      monitorPage.style.boxShadow = `0 0 0 ${outerRim - bezelBorder}px #263020, 0 ${shadowY}px ${shadowBlur}px ${shadowSpread}px rgba(0,0,0,0.88), 0 0 ${glowBlur}px rgba(185,239,131,0.2)`;
+      monitorPage.style.setProperty("--monitor-bezel-indicator", String(monitorBezelProgress));
+    } else {
+      monitorPage.style.removeProperty("border-radius");
+      monitorPage.style.removeProperty("border");
+      monitorPage.style.removeProperty("box-shadow");
+      monitorPage.style.setProperty("--monitor-bezel-indicator", "0");
+    }
+
+    monitorPage.style.transform = `perspective(1200px) translate3d(0, ${monitorExitY}px, 0) scale(${monitorExitScale}) rotateX(${monitorExitRotateX}deg)`;
+    monitorPage.style.opacity = String(pageReveal * (1 - monitorExitFade));
+    monitorPage.style.visibility = (monitorZoomProgress < 0.9 || experienceProgress >= 0.98) ? "hidden" : "visible";
+    monitorPage.style.pointerEvents = (monitorZoomProgress >= 0.98 && experienceProgress < 0.55) ? "auto" : "none";
+    monitorPage.inert = monitorZoomProgress < 0.98 || experienceProgress >= 0.55;
     monitorPage.setAttribute("aria-hidden", String(monitorPage.inert));
-    experiencePage.style.opacity = String(smooth(clamp(experienceProgress / 0.45, 0, 1)));
-    experiencePage.style.transform = `translate3d(${80 * (1 - experienceProgress)}vw, 0, 0) scale(${0.88 + 0.12 * experienceProgress})`;
-    experiencePage.style.pointerEvents = experienceProgress >= 0.82 ? "auto" : "none";
-    experiencePage.inert = experienceProgress < 0.82;
+
+    // Experience & Projects section entrance
+    const experienceReveal = smooth(clamp(experienceProgress / 0.55, 0, 1));
+    const experienceScale = 0.91 + 0.09 * experienceProgress;
+    const experienceY = (1 - experienceProgress) * 35;
+
+    experiencePage.style.opacity = String(experienceReveal);
+    experiencePage.style.transform = `perspective(1200px) translate3d(0, ${experienceY}px, 0) scale(${experienceScale})`;
+    experiencePage.style.visibility = experienceProgress <= 0.01 ? "hidden" : "visible";
+    experiencePage.style.pointerEvents = experienceProgress >= 0.55 ? "auto" : "none";
+    experiencePage.inert = experienceProgress < 0.55;
     experiencePage.setAttribute("aria-hidden", String(experiencePage.inert));
     stage.classList.toggle("in-about", aboutProgress >= 0.84 && scrollY < transferStart);
     stage.classList.toggle("in-technology", technologyProgress >= 0.96);
