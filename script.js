@@ -3,30 +3,50 @@ const THREE = window.THREE;
 if (!THREE) throw new Error("The 3D renderer could not be loaded.");
 
 const technologies = [
-  { name: "Supabase", mark: "SB", color: "#55d5a0", category: "BACKEND AS A SERVICE", level: "DIKUASAI", score: 85, description: "Membangun backend aplikasi dengan database, autentikasi, dan layanan Supabase." },
-  { name: "MySQL", mark: "SQL", color: "#61a8d8", category: "RELATIONAL DATABASE", level: "DIKUASAI", score: 85, description: "Mengelola data relasional dan query untuk kebutuhan aplikasi." },
-  { name: "React", mark: "react", color: "#67dff5", category: "FRONTEND LIBRARY", level: "DIKUASAI", score: 85, description: "Membangun antarmuka responsif dan interaktif dengan komponen." },
-  { name: "Next.js", mark: "next", color: "#f1f0e9", category: "REACT FRAMEWORK", level: "DIKUASAI", score: 85, description: "Mengembangkan aplikasi web berbasis React dengan routing dan rendering modern." },
-  { name: "TypeScript", mark: "ts", color: "#579bfa", category: "TYPED JAVASCRIPT", level: "DIKUASAI", score: 85, description: "Menulis JavaScript dengan tipe yang membantu menjaga kode tetap jelas." },
-  { name: "JavaScript", mark: "JS", color: "#e8cd58", category: "PROGRAMMING LANGUAGE", level: "DIKUASAI", score: 85, description: "Mengembangkan interaksi dan logika aplikasi di web maupun server." },
-  { name: "Tailwind CSS", mark: "TW", color: "#55d5d0", category: "CSS FRAMEWORK", level: "DIKUASAI", score: 85, description: "Membangun tampilan konsisten menggunakan utility classes." },
-  { name: "Flutter", mark: "FL", color: "#69b9f5", category: "CROSS-PLATFORM UI", level: "DIKUASAI", score: 85, description: "Membangun aplikasi lintas platform dengan satu basis kode." },
-  { name: "Dart", mark: "D", color: "#58b8cc", category: "PROGRAMMING LANGUAGE", level: "DIKUASAI", score: 85, description: "Mengembangkan aplikasi menggunakan bahasa Dart, termasuk untuk Flutter." },
-  { name: "Laravel", mark: "L", color: "#f06c63", category: "PHP FRAMEWORK", level: "DIKUASAI", score: 85, description: "Membangun aplikasi backend dengan ekosistem Laravel." },
-  { name: "Node.js", mark: "node", color: "#a8cf67", category: "JAVASCRIPT RUNTIME", level: "DIKUASAI", score: 85, description: "Menjalankan JavaScript di server untuk membangun layanan aplikasi." },
-  { name: "Express.js", mark: "EX", color: "#d4d8cf", category: "NODE.JS FRAMEWORK", level: "DIKUASAI", score: 85, description: "Membuat API dan aplikasi web server dengan framework Express." },
-  { name: "Cloudflare Pages", mark: "CF", color: "#f3a75a", category: "WEB HOSTING", level: "DIKUASAI", score: 85, description: "Mempublikasikan website dan aplikasi web melalui Cloudflare Pages." },
-  { name: "Vercel", mark: "V", color: "#f1f0e9", category: "WEB HOSTING", level: "DIKUASAI", score: 85, description: "Mendeploy aplikasi web melalui platform Vercel." },
-  { name: "Git", mark: "G", color: "#ee795e", category: "VERSION CONTROL", level: "DIKUASAI", score: 85, description: "Melacak perubahan kode dan mengelola riwayat pengembangan." },
-  { name: "GitHub", mark: "GH", color: "#e7e8e0", category: "CODE COLLABORATION", level: "DIKUASAI", score: 85, description: "Menyimpan repository dan berkolaborasi pada proyek perangkat lunak." },
-  { name: "Postman", mark: "PM", color: "#f18c55", category: "API DEVELOPMENT", level: "DIKUASAI", score: 85, description: "Menguji dan mengelola request API selama pengembangan." },
-  { name: "Laragon", mark: "LA", color: "#7bbd8b", category: "LOCAL DEVELOPMENT", level: "DIKUASAI", score: 85, description: "Menyiapkan lingkungan pengembangan lokal untuk aplikasi web." },
+  { name: "Supabase", mark: "SB", color: "#55d5a0", category: "BACKEND AS A SERVICE", level: "PROFICIENT", score: 85, description: "Building application backends with databases, authentication, and Supabase services." },
+  { name: "MySQL", mark: "SQL", color: "#61a8d8", category: "RELATIONAL DATABASE", level: "PROFICIENT", score: 85, description: "Managing relational data and queries for application requirements." },
+  { name: "React", mark: "react", color: "#67dff5", category: "FRONTEND LIBRARY", level: "PROFICIENT", score: 85, description: "Building responsive, interactive interfaces from reusable components." },
+  { name: "Next.js", mark: "next", color: "#f1f0e9", category: "REACT FRAMEWORK", level: "PROFICIENT", score: 85, description: "Developing React web applications with modern routing and rendering." },
+  { name: "TypeScript", mark: "ts", color: "#579bfa", category: "TYPED JAVASCRIPT", level: "PROFICIENT", score: 85, description: "Writing JavaScript with types that keep the codebase clear and predictable." },
+  { name: "JavaScript", mark: "JS", color: "#e8cd58", category: "PROGRAMMING LANGUAGE", level: "PROFICIENT", score: 85, description: "Developing interaction and application logic on both the web and the server." },
+  { name: "Tailwind CSS", mark: "TW", color: "#55d5d0", category: "CSS FRAMEWORK", level: "PROFICIENT", score: 85, description: "Building consistent interfaces with utility classes." },
+  { name: "Flutter", mark: "FL", color: "#69b9f5", category: "CROSS-PLATFORM UI", level: "PROFICIENT", score: 85, description: "Building cross platform applications from a single codebase." },
+  { name: "Dart", mark: "D", color: "#58b8cc", category: "PROGRAMMING LANGUAGE", level: "PROFICIENT", score: 85, description: "Developing applications in the Dart language, including for Flutter." },
+  { name: "Laravel", mark: "L", color: "#f06c63", category: "PHP FRAMEWORK", level: "PROFICIENT", score: 85, description: "Building backend applications with the Laravel ecosystem." },
+  { name: "Node.js", mark: "node", color: "#a8cf67", category: "JAVASCRIPT RUNTIME", level: "PROFICIENT", score: 85, description: "Running JavaScript on the server to build application services." },
+  { name: "Express.js", mark: "EX", color: "#d4d8cf", category: "NODE.JS FRAMEWORK", level: "PROFICIENT", score: 85, description: "Creating APIs and web server applications with the Express framework." },
+  { name: "Cloudflare Pages", mark: "CF", color: "#f3a75a", category: "WEB HOSTING", level: "PROFICIENT", score: 85, description: "Publishing websites and web applications through Cloudflare Pages." },
+  { name: "Vercel", mark: "V", color: "#f1f0e9", category: "WEB HOSTING", level: "PROFICIENT", score: 85, description: "Deploying web applications through the Vercel platform." },
+  { name: "Git", mark: "G", color: "#ee795e", category: "VERSION CONTROL", level: "PROFICIENT", score: 85, description: "Tracking code changes and managing the development history." },
+  { name: "GitHub", mark: "GH", color: "#e7e8e0", category: "CODE COLLABORATION", level: "PROFICIENT", score: 85, description: "Hosting repositories and collaborating on software projects." },
+  { name: "Postman", mark: "PM", color: "#f18c55", category: "API DEVELOPMENT", level: "PROFICIENT", score: 85, description: "Testing and managing API requests during development." },
+  { name: "Laragon", mark: "LA", color: "#7bbd8b", category: "LOCAL DEVELOPMENT", level: "PROFICIENT", score: 85, description: "Preparing local development environments for web applications." },
 ];
+// Keycap colours follow each technology's own brand palette.
 const keycapColors = [
-  "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9",
-  "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9",
-  "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9",
+  "#3ecf8e", // Supabase — Emerald Green
+  "#00758f", // MySQL — Dolphin Blue (accent #f29111)
+  "#61dafb", // React — React Cyan
+  "#000000", // Next.js — Monochrome Black (accent #ffffff)
+  "#3178c6", // TypeScript — TypeScript Blue
+  "#f7df1e", // JavaScript — Sunshine Yellow
+  "#38bdf8", // Tailwind CSS — Sky Blue
+  "#54c5f8", // Flutter — Sky Blue (to #01579b)
+  "#0175c2", // Dart — Blue (accent #00d2b8)
+  "#ff2d20", // Laravel — Artisan Red
+  "#339933", // Node.js — Forest Green (accent #68a063)
+  "#303030", // Express.js — Charcoal
+  "#f38020", // Cloudflare Pages — Cloudflare Orange
+  "#000000", // Vercel — Pitch Black
+  "#f05032", // Git — Vermilion
+  "#181717", // GitHub — Invertocat Black
+  "#ff6c37", // Postman — Postman Orange
+  "#0099ff", // Laragon — Dodger Blue
 ];
+// Brand logos are drawn in their own brand colour, so every tech cap carries a
+// light legend plate to keep the mark readable on top of the coloured cap.
+const legendPlateInset = 62;
+const legendPlateSize = 256 - legendPlateInset * 2;
 
 const canvas = document.querySelector("#keyboard-canvas");
 const stage = document.querySelector("#keyboard-stage");
@@ -155,9 +175,9 @@ function makeShell(width, depth, height, y, color, bevel = 0.08, opening = null)
 }
 
 // Multi-part case with a solid base below the recessed key sockets.
-makeShell(6.55, 3.55, 0.22, -0.48, 0x827c99, 0.07);
-makeShell(6.42, 3.42, 0.27, -0.28, 0xbab2cf, 0.07, [6.12, 3.1]);
-makeShell(6.22, 3.22, 0.045, 0.005, 0x77728b, 0.02, [6.08, 3.06]);
+makeShell(6.55, 3.55, 0.22, -0.48, 0x23272e, 0.07);
+makeShell(6.42, 3.42, 0.27, -0.28, 0x4a5060, 0.07, [6.12, 3.1]);
+makeShell(6.22, 3.22, 0.045, 0.005, 0x333944, 0.02, [6.08, 3.06]);
 
 const socketPlateShape = roundedShape(6.18, 3.2, 0.2);
 const socketFloorY = -0.095;
@@ -166,7 +186,7 @@ const seatedKeyY = 0.1;
 // Leave clearance above the socket floor even when a key is pressed.
 const keyPressTravel = 0.18;
 const socketFloorMaterial = new THREE.MeshStandardMaterial({
-  color: 0x655b76, roughness: 0.92, metalness: 0,
+  color: 0x1d2128, roughness: 0.92, metalness: 0,
 });
 
 function addKeySocket(x, z, width, depth) {
@@ -196,8 +216,8 @@ function addSocketPlate() {
   });
   geometry.rotateX(-Math.PI / 2);
   const plate = new THREE.Mesh(geometry, [
-    new THREE.MeshStandardMaterial({ color: 0xd6cbe5, roughness: 0.45, metalness: 0.2 }),
-    new THREE.MeshStandardMaterial({ color: 0x8c7d9e, roughness: 0.72, metalness: 0.08 }),
+    new THREE.MeshStandardMaterial({ color: 0x3f4550, roughness: 0.45, metalness: 0.2 }),
+    new THREE.MeshStandardMaterial({ color: 0x2b3038, roughness: 0.72, metalness: 0.08 }),
   ]);
   plate.position.y = socketFloorY + 0.005;
   plate.castShadow = true;
@@ -298,6 +318,11 @@ function makeLegendTexture(label, techIndex) {
   if (Number.isInteger(techIndex)) {
     context.fillStyle = keycapColors[techIndex];
     context.fillRect(0, 0, 256, 256);
+    // A light legend plate keeps the brand-coloured mark readable.
+    context.fillStyle = "#f4f6ef";
+    context.beginPath();
+    context.roundRect(legendPlateInset, legendPlateInset, legendPlateSize, legendPlateSize, 30);
+    context.fill();
     const texture = new THREE.CanvasTexture(surface);
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
@@ -305,7 +330,7 @@ function makeLegendTexture(label, techIndex) {
     legendLoads.push(new Promise((resolve, reject) => {
       logo.onload = () => {
         try {
-          const scale = Math.min(176 / logo.naturalWidth, 176 / logo.naturalHeight);
+          const scale = Math.min(110 / logo.naturalWidth, 110 / logo.naturalHeight);
           const width = logo.naturalWidth * scale;
           const height = logo.naturalHeight * scale;
           context.drawImage(logo, (256 - width) / 2, (256 - height) / 2, width, height);
@@ -372,7 +397,7 @@ layout.forEach((row, rowIndex) => {
 addSocketPlate();
 
 function addScrew(x, z) {
-  const screw = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.025, 20), new THREE.MeshStandardMaterial({ color: 0x67716c, metalness: 0.8, roughness: 0.27 }));
+  const screw = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.025, 20), new THREE.MeshStandardMaterial({ color: 0x4a504c, metalness: 0.8, roughness: 0.27 }));
   screw.position.set(x, 0.0725, z);
   screw.castShadow = true;
   board.add(screw);
@@ -483,22 +508,15 @@ function drawTechnologyScreen(timestamp = 0) {
   background.addColorStop(1, "#10251c");
   context.fillStyle = background;
   context.fillRect(0, 0, width, techScreenCanvas.height);
-  context.strokeStyle = "rgba(195,238,154,.08)";
-  context.lineWidth = 1;
-  for (let x = 0; x < width; x += 40) {
-    context.beginPath(); context.moveTo(x, 0); context.lineTo(x, 512); context.stroke();
-  }
   context.fillStyle = "#b9ef83";
   context.font = "500 19px 'DM Mono', monospace";
-  context.fillText("ZULFAHMI  /  TECHNOLOGY STACK", 56, 72);
+  context.fillText("CAPABILITIES", 56, 72);
   context.fillStyle = "#f0f5ea";
   context.font = "600 44px Manrope, sans-serif";
-  context.fillText("Teknologi yang dikuasai", 56, 145);
+  context.fillText("Core Stack & Ecosystem", 56, 145);
   context.fillStyle = "#92a797";
   context.font = "20px 'DM Mono', monospace";
-  context.fillText("TOOLS UNTUK MEMBANGUN IDE MENJADI NYATA", 56, 190);
-  context.fillStyle = "#b9ef83";
-  context.fillText("18 / 18  DIKUASAI", 56, 242);
+  context.fillText("ENGINEERED FOR PERFORMANCE, SCALABILITY, AND PRODUCTION", 56, 190);
   context.fillStyle = "rgba(185,239,131,.14)";
   context.fillRect(56, 267, width - 112, 1);
   context.save();

@@ -1,0 +1,217 @@
+/* ==========================================================================
+   07 INITIATE A PROJECT (CONTACT CTA)
+   Closing call to action: centered ambient panel with four action pills.
+   Zero hyphens or dashes in any visible text.
+   ========================================================================== */
+
+.initiate-section {
+  position: relative;
+  border-top: 1px solid #ffffff0c;
+  background: var(--bg);
+  overflow: hidden;
+  scroll-margin-top: 32px;
+}
+
+.initiate-section::before {
+  content: "";
+  position: absolute;
+  inset: -14% -18% auto;
+  height: 76%;
+  background: radial-gradient(50% 60% at 50% 0%, #c6ee6814, transparent 72%);
+  pointer-events: none;
+}
+
+.initiate-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1600px;
+  margin: auto;
+  padding: clamp(56px, 8vh, 96px) 8vw clamp(48px, 7vh, 80px) 10.5vw;
+}
+
+/* ---------- Top bar, mirrors the previous sections ---------- */
+.initiate-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ffffff0b;
+}
+
+.initiate-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  color: #b7beab;
+  font: 10px var(--mono);
+  letter-spacing: .12em;
+}
+
+.initiate-eyebrow span { color: var(--lime); }
+
+.initiate-topline-note {
+  color: #828c78;
+  font: 9px var(--mono);
+  letter-spacing: .08em;
+}
+
+/* ---------- Centered ambient panel ---------- */
+.initiate-panel {
+  position: relative;
+  max-width: 940px;
+  margin: clamp(40px, 6vh, 74px) auto 0;
+  padding: clamp(38px, 5vw, 72px) clamp(24px, 4vw, 64px);
+  border: 1px solid #ffffff14;
+  border-radius: 22px;
+  background: linear-gradient(165deg, #1a1e17 0%, #131610 56%, #0d100b 100%);
+  box-shadow: inset 0 1px 0 #ffffff0d, 0 30px 78px rgba(0, 0, 0, .55);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Radial ambient light behind the copy. */
+.initiate-panel::before {
+  content: "";
+  position: absolute;
+  inset: -46% -10% auto;
+  height: 92%;
+  background: radial-gradient(48% 60% at 50% 42%, #c6ee6826, transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Soft green edge glow that reads as a lit border. */
+.initiate-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(160deg, #c6ee8040, transparent 38%, transparent 68%, #c6ee8026);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.initiate-panel > * { position: relative; z-index: 1; }
+
+.initiate-kicker {
+  margin: 0 0 clamp(16px, 2.4vh, 22px);
+  color: var(--lime);
+  font: 500 9px var(--mono);
+  letter-spacing: .16em;
+}
+
+.initiate-title {
+  margin: 0 auto;
+  max-width: 18ch;
+  color: #fff;
+  font-size: clamp(30px, 4.2vw, 58px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.05em;
+}
+
+.initiate-copy {
+  max-width: 34rem;
+  margin: clamp(16px, 2.6vh, 24px) auto 0;
+  color: #8b9384;
+  font-size: clamp(12px, 1.05vw, 14.5px);
+  line-height: 1.85;
+}
+
+/* ---------- Action pills ---------- */
+.initiate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: clamp(28px, 4vh, 42px) auto 0;
+  padding: 0;
+  list-style: none;
+}
+
+.initiate-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 20px;
+  border: 1px solid #ffffff1f;
+  border-radius: 999px;
+  background: #ffffff07;
+  color: #d3d9cb;
+  font: 500 9.5px var(--mono);
+  letter-spacing: .1em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .28s ease, color .28s ease, background .28s ease,
+    box-shadow .28s ease, transform .28s cubic-bezier(.2, .8, .2, 1);
+}
+
+.initiate-pill:hover,
+.initiate-pill:focus-visible {
+  border-color: var(--lime);
+  color: var(--lime);
+  background: #c6ee681a;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .5), 0 0 24px #c6ee6824;
+  transform: translateY(-2px);
+}
+
+.initiate-pill:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+
+/* Primary pill: the email action leads the row. */
+.initiate-pill.is-primary {
+  border-color: #c6ee8066;
+  background: #c6ee6814;
+  color: var(--lime);
+}
+
+.initiate-pill.is-primary:hover,
+.initiate-pill.is-primary:focus-visible {
+  border-color: var(--lime);
+  background: #c6ee6826;
+}
+
+.initiate-pill-glyph {
+  font-size: 11px;
+  line-height: 1;
+  transition: transform .28s cubic-bezier(.2, .8, .2, 1);
+}
+
+.initiate-pill:hover .initiate-pill-glyph { transform: translate(2px, -2px); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1180px) {
+  .initiate-inner { padding-left: 6vw; padding-right: 5vw; }
+}
+
+@media (max-width: 760px) {
+  .initiate-inner { padding: 48px 20px 44px; }
+  .initiate-topline-note { display: none; }
+  .initiate-panel { padding: 32px 20px; border-radius: 18px; }
+  .initiate-title { max-width: 16ch; font-size: clamp(26px, 8vw, 36px); }
+  .initiate-copy { max-width: 32rem; }
+  /* Equal width pairs keep the 2 by 2 mobile grid tidy. */
+  .initiate-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .initiate-pill { width: 100%; padding: 13px 12px; font-size: 8.5px; letter-spacing: .07em; }
+}
+
+@media (max-width: 352px) {
+  .initiate-actions { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .initiate-pill,
+  .initiate-pill-glyph { transition: none; }
+}

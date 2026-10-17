@@ -24,7 +24,7 @@
       tile.className = "monitor-portal-logo";
       tile.type = "button";
       tile.dataset.techName = card.dataset.name;
-      tile.setAttribute("aria-label", `Lihat informasi ${card.dataset.name}`);
+      tile.setAttribute("aria-label", `View ${card.dataset.name} information`);
       tile.setAttribute("aria-controls", "monitor-portal-detail");
       tile.setAttribute("aria-pressed", "false");
       const image = document.createElement("img");
@@ -148,7 +148,7 @@
         option.setAttribute("aria-pressed", String(selected));
       });
       const label = category === "all" ? "" : " · " + button.firstChild.textContent.trim();
-      results.textContent = count + " teknologi ditampilkan" + label;
+      results.textContent = count + " technologies shown" + label;
     });
   });
   filters.hidden = false;

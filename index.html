@@ -11,69 +11,282 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="technologies.css" />
+    <link rel="stylesheet" href="workflow.css" />
+    <link rel="stylesheet" href="initiate.css" />
     <link rel="stylesheet" href="contact.css" />
+    <style>
+      .role-rotator {
+        display: inline-flex;
+        align-items: flex-end;
+        position: relative;
+        overflow: visible;
+        vertical-align: baseline;
+        height: 1.15em;
+        padding-right: 8px;
+        margin-inline: 0;
+        transition: width .35s cubic-bezier(.4,0,.2,1);
+        clip-path: inset(-10% -10px -10% -10px);
+      }
+      .role-word {
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: max-content;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateY(110%);
+        transition: opacity .45s cubic-bezier(.4,0,.2,1), transform .45s cubic-bezier(.4,0,.2,1);
+        color: #ffffff;
+      }
+      .role-word.is-active {
+        position: relative;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .role-word.is-exiting {
+        opacity: 0;
+        transform: translateY(-110%);
+      }
+      #hero-title {
+        font-size: clamp(34px, 3.8vw, 58px);
+        color: #b8bab0;
+      }
+      #hero-title .headline-accent {
+        color: #9abf50;
+      }
+      .navbar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 1px solid #ffffff18;
+        border-radius: 8px;
+        background: transparent;
+        color: #a5ad99;
+        cursor: pointer;
+        transition: border-color .25s, color .25s, background .25s;
+        flex-shrink: 0;
+        z-index: 10;
+      }
+      .navbar-toggle:hover {
+        border-color: #ffffff38;
+        color: var(--text);
+      }
+      .toggle-icon {
+        display: block;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1;
+        transition: transform .3s cubic-bezier(.4,0,.2,1), color .25s;
+      }
+      .toggle-icon.is-swap {
+        animation: toggle-pop .32s cubic-bezier(.34,1.4,.5,1);
+      }
+      @keyframes toggle-pop {
+        0% { transform: scale(.55) rotate(-25deg); opacity: 0; }
+        100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      }
+      /* Transisi elemen navbar saat dibuka/ditutup */
+      .topbar {
+        transition: border-color .3s ease, background-color .3s ease;
+      }
+      .topbar .wordmark,
+      .topbar nav {
+        transition: opacity .28s ease, transform .35s cubic-bezier(.4,0,.2,1), visibility .35s;
+      }
+      /* State tertutup: seluruh navbar hilang, hanya tombol hamburger tersisa */
+      .topbar.is-collapsed {
+        border-bottom-color: transparent;
+      }
+      .topbar.is-collapsed .wordmark {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-14px);
+      }
+      .topbar.is-collapsed nav {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(14px);
+      }
+      .topbar.is-collapsed .navbar-toggle {
+        border-color: var(--lime);
+        color: var(--lime);
+      }
+      /* Penyesuaian ukuran agar navbar + tombol selalu pas di layar kecil */
+      @media (max-width: 680px) {
+        .topbar {
+          padding-inline: 16px;
+        }
+        .topbar nav {
+          gap: 12px;
+        }
+        .topbar .nav-link {
+          font-size: 9px;
+        }
+        .navbar-toggle {
+          width: 36px;
+          height: 36px;
+        }
+      }
+      @media (max-width: 430px) {
+        .topbar {
+          padding-inline: 12px;
+        }
+        .topbar nav {
+          gap: 8px;
+        }
+        .topbar .nav-link {
+          font-size: 8.5px;
+        }
+        .navbar-toggle {
+          width: 34px;
+          height: 34px;
+        }
+        .topbar .wordmark {
+          font-size: 14px;
+        }
+      }
+      @media (max-width: 370px) {
+        .topbar {
+          padding-inline: 10px;
+        }
+        .topbar nav {
+          gap: 5px;
+        }
+        .topbar .nav-link {
+          font-size: 7.5px;
+        }
+        .navbar-toggle {
+          width: 32px;
+          height: 32px;
+        }
+        .topbar .wordmark {
+          font-size: 13px;
+        }
+      }
+      @media (max-width: 330px) {
+        .topbar {
+          padding-inline: 8px;
+        }
+        .topbar nav {
+          gap: 4px;
+        }
+        .topbar .nav-link {
+          font-size: 7px;
+        }
+        .topbar .nav-link span {
+          display: none;
+        }
+        .navbar-toggle {
+          width: 30px;
+          height: 30px;
+        }
+        .topbar .wordmark {
+          font-size: 12px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .topbar .wordmark,
+        .topbar nav,
+        .toggle-icon {
+          transition: none;
+        }
+        .toggle-icon.is-swap {
+          animation: none;
+        }
+      }
+    </style>
+    <noscript>
+      <style>
+        /* Tanpa JavaScript, navbar ditampilkan penuh agar navigasi tetap bisa dipakai */
+        .topbar.is-collapsed .wordmark,
+        .topbar.is-collapsed nav {
+          opacity: 1 !important;
+          visibility: visible !important;
+          pointer-events: auto !important;
+          transform: none !important;
+        }
+        .navbar-toggle {
+          display: none !important;
+        }
+      </style>
+    </noscript>
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
-    <header class="topbar">
-      <a class="wordmark" href="#home" aria-label="ZULFAHMI, beranda">ZULFAHMI</a>
-      <nav aria-label="Navigasi utama">
-        <a class="nav-link active" href="#home"><span>01</span> Beranda</a>
-        <a class="nav-link" href="#about"><span>02</span> Tentang</a>
-        <a class="nav-link" href="#stack"><span>03</span> Teknologi</a>
-        <a class="nav-link" href="#experience-projects"><span>04</span> Pengalaman</a>
-        <a class="nav-link" href="#contact"><span>05</span> Kontak</a>
+    <header class="topbar is-collapsed">
+      <a class="wordmark" href="#home" aria-label="ZULFAHMI, home">ZULFAHMI</a>
+      <nav id="primary-navigation" aria-label="Main navigation">
+        <a class="nav-link active" href="#home"><span>01</span> Home</a>
+        <a class="nav-link" href="#about"><span>02</span> About</a>
+        <a class="nav-link" href="#stack"><span>03</span> Tech Stack</a>
+        <a class="nav-link" href="#experience-projects"><span>04</span> Works</a>
+        <a class="nav-link" href="#workflow"><span>05</span> Workflow</a>
+        <a class="nav-link" href="#initiate"><span>06</span> Contact</a>
       </nav>
-      <a class="availability" href="#contact"><span class="availability-dot"></span> TERBUKA UNTUK KOLABORASI</a>
+      <button class="navbar-toggle" id="navbar-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="toggle-icon">&#9776;</span>
+      </button>
     </header>
 
     <main id="home">
       <section class="hero" aria-labelledby="hero-title">         
         <div class="hero-copy">
-          <div class="eyebrow"><span class="eyebrow-line"></span> ZULFAHMI 2025</div>
-          <h1 id="hero-title">Dari ide,<br /><span class="headline-accent">jadi nyata.</span></h1>
-          <p class="intro">Halo, saya <strong>Zulfahmi</strong>, seorang <strong>Full Stack Developer</strong> yang senang mengubah ide menjadi website dan aplikasi yang interaktif, fungsional, dan bermakna.</p>
-          <p class="intro">Saya membangun pengalaman digital dari antarmuka hingga sistem di baliknya, dengan menggabungkan teknologi, kreativitas, dan solusi yang tepat guna.</p>
-          <a class="work-link" href="#about"><span class="arrow-circle" aria-hidden="true">&#8600;</span><span>Lihat cara saya berkarya</span></a>
-          <div class="hero-index"><span>01</span><span class="index-rule"></span><span>INTRODUKSI</span></div>
+          <div class="eyebrow"><span class="eyebrow-line"></span> Available for Projects &amp; Opportunities</div>
+          <h1 id="hero-title">ZULFAHMI<br /><span class="headline-accent"><span class="role-rotator"><span class="role-word is-active">fullstack</span><span class="role-word">web</span><span class="role-word">mobile</span></span><br />developer</span></h1>
+          <p class="intro"><strong>Technology shouldn't be complicated. No bloat, just working software.</strong></p>
+          <p class="intro">I help businesses digitize their workflows and reach customers on any screen by connecting robust APIs with fast, intuitive web dashboards and mobile apps.</p>
+          <div class="hero-socials" aria-label="Profil profesional">
+            <a class="hero-social" href="https://github.com/f4hmii" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .5C5.73.5.9 5.33.9 11.6c0 4.9 3.17 9.06 7.57 10.53.55.1.75-.24.75-.53 0-.26-.01-1.13-.02-2.05-3.08.67-3.73-1.3-3.73-1.3-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.11.08 1.7 1.14 1.7 1.14.99 1.7 2.6 1.21 3.23.93.1-.72.39-1.21.7-1.49-2.46-.28-5.05-1.23-5.05-5.47 0-1.21.43-2.2 1.14-2.97-.11-.28-.49-1.41.11-2.94 0 0 .93-.3 3.05 1.13a10.6 10.6 0 0 1 5.55 0c2.12-1.43 3.05-1.13 3.05-1.13.6 1.53.22 2.66.11 2.94.71.77 1.14 1.76 1.14 2.97 0 4.25-2.6 5.18-5.07 5.46.4.34.75 1.01.75 2.04 0 1.47-.01 2.66-.01 3.02 0 .29.19.64.76.53 4.4-1.47 7.56-5.63 7.56-10.53C23.1 5.33 18.27.5 12 .5z"/></svg>
+            </a>
+            <a class="hero-social" href="https://www.linkedin.com/in/zulfahmi-2b6561325" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4v11H3v-11zm6.5 0h3.83v1.5h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76v5.69h-4v-5.05c0-1.2-.02-2.75-1.7-2.75-1.7 0-1.96 1.3-1.96 2.66v5.14h-4v-11z"/></svg>
+            </a>
+          </div>
+          <div class="hero-index"><span>01</span><span class="index-rule"></span><span>INTRODUCTION</span></div>
         </div>
 
         <div class="showcase">
-          <div class="showcase-heading"><span class="section-label">TECH STACK</span><span class="hint"><span class="hint-dot"></span> ARAHKAN KURSOR KE LOGO</span></div>
+          <div class="showcase-heading"><span class="section-label">TECH STACK</span><span class="hint"><span class="hint-dot"></span> Hover on the keyboard</span></div>
           <div class="keyboard-stage-slot" id="keyboard-stage-slot">
             <div class="keyboard-stage" id="keyboard-stage" aria-label="Keyboard gaming 3D buatan sendiri" aria-busy="true">
-              <canvas id="keyboard-canvas" aria-label="Keyboard 3D interaktif; arahkan kursor ke tombol berlogo teknologi" aria-hidden="true"></canvas>
+              <canvas id="keyboard-canvas" aria-label="Interactive 3D keyboard; point at a keycap to inspect its technology" aria-hidden="true"></canvas>
               <div class="keyboard-fallback" id="keyboard-fallback" aria-label="Keyboard compact 3D interaktif" aria-hidden="true" inert></div>
               <div class="canvas-loading" id="canvas-loading" role="status"><span class="loading-dot"></span> MERAKIT KEYBOARD 3D</div>
               <article class="tech-card" id="tech-card" aria-live="polite">
-                <div class="card-topline"><span class="card-kicker">SEDANG DIPILIH</span><span class="card-number" id="tech-number">01 / 18</span></div>
+                <div class="card-topline"><span class="card-kicker">CURRENTLY INSPECTING</span><span class="card-number" id="tech-number">01 / 18</span></div>
                 <div class="tech-main"><div class="tech-icon" id="tech-icon"></div><div><h2 id="tech-name">Supabase</h2><p id="tech-category">BACKEND AS A SERVICE</p></div></div>
-                <p class="tech-description" id="tech-description">Membangun backend aplikasi dengan database, autentikasi, dan layanan Supabase.</p>
-                <div class="card-bottom"><span class="level-label">STATUS</span><span class="level-value" id="tech-level">DIKUASAI</span></div>
+                <p class="tech-description" id="tech-description">Building application backends with databases, authentication, and Supabase services.</p>
+                <div class="card-bottom"><span class="level-label">PROFICIENCY</span><span class="level-value" id="tech-level">PROFICIENT</span></div>
                 <div class="level-track"><span id="level-fill"></span></div>
               </article>
             </div>
           </div>
-          <div class="showcase-foot"><span>18 TEKNOLOGI Â· SATU ALUR KERJA</span><span class="foot-coordinates">06Â°55' S &nbsp; 107Â°36' E</span></div>
+          <div class="showcase-foot"><span>18 Tech · Single Workflow</span><span class="foot-coordinates">06°55' S &nbsp; 107°36' E</span></div>
         </div>
       </section>
-      <div class="bottom-strip"><span>DESAIN DENGAN RASA. DIBANGUN DENGAN TUJUAN.</span><span class="strip-center">BANDUNG, JAWA BARAT <span class="strip-dot">&#9679;</span> <span id="local-time">--:--:-- WIB</span></span><a class="section-scroll" href="#about">KENALI SAYA <span class="down-arrow" aria-hidden="true">&#8595;</span></a></div>
+      <div class="bottom-strip"><span>BANDUNG, WEST JAVA <span class="strip-dot">&#9679;</span></span><span class="strip-center"><span id="local-time">00:00:00 WIB</span></span><a class="section-scroll" href="#about">Get to know me <span class="down-arrow" aria-hidden="true">&#8595;</span></a></div>
 
       <section class="about-section" id="about" aria-labelledby="about-title">
         <div class="about-inner">
           <div class="about-section-heading">
-            <p class="about-eyebrow" id="about-title"><span>02</span> TENTANG SAYA</p>
+            <p class="about-eyebrow" id="about-title"><span>02</span> ABOUT ME</p>
             <span class="about-section-note">WEB &nbsp;/&nbsp; BACKEND &nbsp;/&nbsp; MOBILE</span>
           </div>
           <div class="about-grid">
-            <div class="about-workspace-description" lang="id">
-              <p><strong>Setiap proyek, perspektif baru.</strong></p>
-              <p>Saya menikmati proses memahami masalah, mengeksplorasi ide, dan menemukan pendekatan yang tepat. Pengalaman saya mencakup platform e-commerce, kios interaktif berbasis gestur, hingga website komunitas.</p>
-              <p><strong>E-COMMERCE &nbsp;&middot;&nbsp; INTERACTIVE KIOSK &nbsp;&middot;&nbsp; COMMUNITY WEB</strong></p>
+            <div class="about-workspace-description">
+              <p><strong>Engineering beyond standard screens.</strong></p>
+              <p>I don't just write code in isolation. I focus on how systems actually operate in the real world. From architecting backend databases and mobile apps for ecommerce to experimenting with computer vision for touchless kiosks, I build software that adapts to user needs.</p>
+              <p><strong>FULL STACK WEB &nbsp;&bull;&nbsp; CROSS PLATFORM MOBILE &nbsp;&bull;&nbsp; SMART INTERFACES</strong></p>
             </div>
             <div class="about-expertise" data-expertise>
-              <div class="about-expertise-heading"><span>FOKUS PENGEMBANGAN</span><span aria-hidden="true">&lt;/&gt;</span></div>
-              <div class="about-tabs" role="tablist" aria-label="Bidang pengembangan" hidden>
+              <div class="about-expertise-heading"><span>DEVELOPMENT FOCUS</span><span aria-hidden="true">&lt;/&gt;</span></div>
+              <div class="about-tabs" role="tablist" aria-label="Development fields" hidden>
                 <button class="about-tab" type="button" role="tab" id="about-web-tab" aria-controls="about-web" aria-selected="true">Web<span aria-hidden="true">01</span></button>
                 <button class="about-tab" type="button" role="tab" id="about-backend-tab" aria-controls="about-backend" aria-selected="false" tabindex="-1">Backend<span aria-hidden="true">02</span></button>
                 <button class="about-tab" type="button" role="tab" id="about-mobile-tab" aria-controls="about-mobile" aria-selected="false" tabindex="-1">Mobile<span aria-hidden="true">03</span></button>
@@ -81,42 +294,42 @@
 
               <div class="about-panel" id="about-web">
                 <div class="about-field-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><rect x="5" y="8" width="38" height="31" rx="4"/><path d="M5 17h38M11 12.5h1m4 0h1M21 24l-5 4 5 4m7-8 5 4-5 4"/></svg></div>
-                <h3>Nyaman di setiap layar.</h3>
-                <p>Membangun antarmuka web yang responsif dan interaktif, dengan komponen yang terstruktur untuk kebutuhan aplikasi.</p>
-                <ul class="about-tech-list" aria-label="Teknologi web">
+                <h3>Comfortable on every screen.</h3>
+                <p>Building responsive, interactive web interfaces with well structured components for real application needs.</p>
+                <ul class="about-tech-list" aria-label="Web technologies">
                   <li><img src="assets/tech-stack/react.svg" width="18" height="18" alt="" loading="lazy" />React</li>
                   <li><img src="assets/tech-stack/nextjs.svg" width="18" height="18" alt="" loading="lazy" />Next.js</li>
                   <li><img src="assets/tech-stack/typescript.svg" width="18" height="18" alt="" loading="lazy" />TypeScript</li>
                   <li><img src="assets/tech-stack/tailwindcss.svg" width="18" height="18" alt="" loading="lazy" />Tailwind CSS</li>
                 </ul>
-                <p class="about-focus-note">ANTARMUKA &nbsp;&middot;&nbsp; KOMPONEN &nbsp;&middot;&nbsp; INTERAKSI</p>
+                <p class="about-focus-note">INTERFACE &nbsp;&middot;&nbsp; COMPONENTS &nbsp;&middot;&nbsp; INTERACTION</p>
               </div>
 
               <div class="about-panel" id="about-backend">
                 <div class="about-field-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="10" rx="16" ry="6"/><path d="M8 10v25c0 3.3 7.2 6 16 6s16-2.7 16-6V10M8 22c0 3.3 7.2 6 16 6s16-2.7 16-6"/></svg></div>
-                <h3>Logika di balik pengalaman.</h3>
-                <p>Mengembangkan API, autentikasi, dan pengelolaan data agar antarmuka terhubung dengan layanan yang dibutuhkan aplikasi.</p>
-                <ul class="about-tech-list" aria-label="Teknologi backend">
+                <h3>The logic behind the experience.</h3>
+                <p>Developing APIs, authentication, and data management so every interface connects with the services the application depends on.</p>
+                <ul class="about-tech-list" aria-label="Backend technologies">
                   <li><img src="assets/tech-stack/laravel.svg" width="18" height="18" alt="" loading="lazy" />Laravel</li>
                   <li><img src="assets/tech-stack/nodejs.svg" width="18" height="18" alt="" loading="lazy" />Node.js</li>
                   <li><img src="assets/tech-stack/express.svg" width="18" height="18" alt="" loading="lazy" />Express.js</li>
                   <li><img src="assets/tech-stack/mysql.svg" width="18" height="18" alt="" loading="lazy" />MySQL</li>
                   <li><img src="assets/tech-stack/supabase.svg" width="18" height="18" alt="" loading="lazy" />Supabase</li>
                 </ul>
-                <p class="about-focus-note">API &nbsp;&middot;&nbsp; AUTENTIKASI &nbsp;&middot;&nbsp; DATABASE</p>
+                <p class="about-focus-note">API &nbsp;&middot;&nbsp; AUTHENTICATION &nbsp;&middot;&nbsp; DATABASE</p>
               </div>
 
               <div class="about-panel" id="about-mobile">
                 <div class="about-field-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><rect x="13" y="4" width="22" height="40" rx="5"/><path d="M20 9h8m-8 29h8M19 23l4 4 7-8"/></svg></div>
-                <h3>Hadir dalam genggaman.</h3>
-                <p>Mengembangkan aplikasi mobile lintas platform dengan Flutter dan Dart, dari tampilan hingga integrasi dengan backend.</p>
-                <ul class="about-tech-list" aria-label="Teknologi mobile">
+                <h3>Present in the palm of your hand.</h3>
+                <p>Developing cross platform mobile applications with Flutter and Dart, from the interface through to backend integration.</p>
+                <ul class="about-tech-list" aria-label="Mobile technologies">
                   <li><img src="assets/tech-stack/flutter.svg" width="18" height="18" alt="" loading="lazy" />Flutter</li>
                   <li><img src="assets/tech-stack/dart.svg" width="18" height="18" alt="" loading="lazy" />Dart</li>
                 </ul>
-                <p class="about-focus-note">LINTAS PLATFORM &nbsp;&middot;&nbsp; UI &nbsp;&middot;&nbsp; INTEGRASI API</p>
+                <p class="about-focus-note">CROSS PLATFORM &nbsp;&middot;&nbsp; UI &nbsp;&middot;&nbsp; API INTEGRATION</p>
               </div>
-              <a class="about-stack-link" href="#stack">Jelajahi tech stack <span aria-hidden="true">&#8599;</span></a>
+              <a class="about-stack-link" href="#stack">Explore tech stack <span aria-hidden="true">&#8599;</span></a>
             </div>
           </div>
         </div>
@@ -125,34 +338,34 @@
       <section class="technologies-section technology-catalog-hidden" id="stack" aria-labelledby="technologies-title">
         <div class="technologies-inner">
           <div class="technologies-heading">
-            <p class="about-eyebrow"><span>03</span> TEKNOLOGI</p>
-            <span class="technologies-note">PERANGKAT DI BALIK PROSES</span>
+            <p class="about-eyebrow"><span>03</span> TECH STACK</p>
+            <span class="technologies-note">TOOLS BEHIND THE PROCESS</span>
           </div>
           <div class="technologies-intro">
-            <h2 id="technologies-title">Teknologi di balik<br /><span>setiap karya.</span></h2>
+            <h2 id="technologies-title">Powering the<br /><span>architecture.</span></h2>
             <div class="technologies-summary">
-              <p>Setiap ide membutuhkan pendekatan yang tepat. Ini adalah teknologi yang saya gunakan untuk membangun antarmuka, mengolah data, dan membawa aplikasi sampai ke tangan pengguna.</p>
-              <span class="technologies-total"><strong>18</strong> TEKNOLOGI &nbsp;&middot;&nbsp; SATU ALUR KERJA</span>
+              <p>Great software relies on a solid foundation. This is the core ecosystem I use to design relational databases, engineer backend APIs, and deliver fluid applications across both web browsers and mobile devices.</p>
+              <span class="technologies-total"><strong>18</strong> CORE TOOLS &nbsp;&bull;&nbsp; ONE COHESIVE WORKFLOW</span>
             </div>
           </div>
           <div class="technology-monitor-dock" id="technology-monitor-dock" aria-hidden="true"></div>
           <div class="monitor-portal-journey" id="monitor-portal-journey">
-            <section class="monitor-portal-page" id="monitor-portal-page" aria-label="Halaman teknologi di dalam monitor" aria-hidden="true" inert>
+            <section class="monitor-portal-page" id="monitor-portal-page" aria-label="Technology page inside the monitor" aria-hidden="true" inert>
               <div class="monitor-portal-content">
-                <div class="monitor-portal-topline"><span>ZULFAHMI &nbsp;/&nbsp; TECHNOLOGY STACK</span><span>&lt;/&gt;</span></div>
+                <div class="monitor-portal-topline"><span>CAPABILITIES</span><span>&lt;/&gt;</span></div>
                 <div class="monitor-portal-intro">
                   <div class="monitor-portal-heading">
-                    <h2>Teknologi yang dikuasai</h2>
-                    <p>TOOLS UNTUK MEMBANGUN IDE MENJADI NYATA</p>
+                    <h2>Core Stack &amp; Ecosystem</h2>
+                    <p>ENGINEERED FOR PERFORMANCE, SCALABILITY, AND PRODUCTION</p>
                   </div>
-                  <div class="monitor-portal-categories" aria-label="Kategori teknologi">
-                    <div class="monitor-portal-category"><span>01 / 05</span><strong>FRONTEND</strong><small>Antarmuka dan interaksi</small></div>
-                    <div class="monitor-portal-category"><span>02 / 05</span><strong>BACKEND</strong><small>Data dan layanan</small></div>
-                    <div class="monitor-portal-category"><span>03 / 02</span><strong>MOBILE</strong><small>Aplikasi lintas platform</small></div>
-                    <div class="monitor-portal-category"><span>04 / 06</span><strong>TOOLS</strong><small>Alur kerja dan deployment</small></div>
+                  <div class="monitor-portal-categories" aria-label="Technology categories">
+                    <div class="monitor-portal-category"><strong>FRONTEND</strong></div>
+                    <div class="monitor-portal-category"><strong>BACKEND</strong></div>
+                    <div class="monitor-portal-category"><strong>MOBILE</strong></div>
+                    <div class="monitor-portal-category"><strong>TOOLS</strong></div>
                   </div>
                 </div>
-                <div class="monitor-portal-marquee" aria-label="Logo teknologi yang dikuasai">
+                <div class="monitor-portal-marquee" aria-label="Technology logos in the stack">
                   <div class="monitor-portal-track" id="monitor-portal-track"></div>
                 </div>
                 <p class="monitor-portal-domains" aria-label="Web, Backend, Mobile, Deployment">
@@ -160,12 +373,12 @@
                 </p>
                 <div class="monitor-portal-bottom">
                   <div class="monitor-portal-approach">
-                    <p class="monitor-portal-approach-kicker">PENDEKATAN SAYA — 01</p>
-                    <h3>Bukan soal banyaknya tools.<br />Tapi bagaimana menggunakannya.</h3>
-                    <p>Setiap proyek memiliki kebutuhan yang berbeda. Saya memilih teknologi yang paling relevan dengan mempertimbangkan performa, pengalaman pengguna, dan kemudahan pengembangan.</p>
+                    <p class="monitor-portal-approach-kicker">MY APPROACH</p>
+                    <h3>Not about the number of tools.<br />It is how you orchestrate them.</h3>
+                    <p>A great product happens when backend logic, database queries, and frontend interfaces move as one. I connect these layers into a single, cohesive system that runs fast and scales cleanly.</p>
                   </div>
-                  <aside class="monitor-portal-detail" id="monitor-portal-detail" aria-label="Informasi teknologi" aria-live="polite" hidden>
-                    <p class="monitor-portal-detail-kicker">INFORMASI TEKNOLOGI</p>
+                  <aside class="monitor-portal-detail" id="monitor-portal-detail" aria-label="Technology information" aria-live="polite" hidden>
+                    <p class="monitor-portal-detail-kicker">TECHNOLOGY INFORMATION</p>
                     <div class="monitor-portal-detail-heading">
                       <span class="monitor-portal-detail-icon"><img id="monitor-portal-detail-image" width="40" height="40" alt="" /></span>
                       <div><p id="monitor-portal-detail-category"></p><h3 id="monitor-portal-detail-name"></h3></div>
@@ -174,194 +387,269 @@
                     <p class="monitor-portal-detail-description" id="monitor-portal-detail-description"></p>
                   </aside>
                 </div>
-              </div>
-            </section>
-            <section class="experience-page" id="experience-projects" aria-labelledby="experience-title" aria-hidden="true" inert>
+                </div>
+                </section>
+                  <section class="experience-page" id="experience-projects" aria-labelledby="experience-title">
               <div class="experience-content">
                 <div class="experience-topline">
-                  <p class="experience-eyebrow"><span>04</span> PENGALAMAN &amp; PROYEK</p>
-                  <span class="experience-topline-note">WEB &nbsp;/&nbsp; INTERAKTIF &nbsp;/&nbsp; KOMUNITAS</span>
+                  <p class="experience-eyebrow"><span>04</span> SELECTED WORKS</p>
+                  <span class="experience-topline-note">PROOF OF EXECUTION</span>
                 </div>
                 <div class="experience-intro">
                   <div>
-                    <p class="experience-kicker"><span class="kicker-line" aria-hidden="true"></span> PENGALAMAN YANG MEMBENTUK KARYA</p>
-                    <h2 id="experience-title">Dari tantangan<br /><span>menjadi karya.</span></h2>
+                    <h2 id="experience-title">Systems built for<br /><span>the real world.</span></h2>
                   </div>
-                  <p>Setiap proyek memberi perspektif baru: memahami kebutuhan, mengeksplorasi ide, lalu membangun solusi yang dapat digunakan.</p>
+                  <p>Architecture means nothing without shipping. Here is a curated selection of platforms where backend logic, database design, and user interfaces come together to solve actual operational challenges.</p>
                 </div>
-                <div class="experience-projects" aria-label="Proyek yang pernah dikerjakan">
-                  <article class="experience-project">
+                <div class="project-carousel">
+                  <div class="project-track" id="project-track" role="region" aria-label="Selected works, scroll horizontally" tabindex="0">
+                                    <article class="experience-project" data-image="image_asset/sentra_kreasi.png" data-link="#initiate">
                     <div class="experience-project-meta">
-                      <span class="experience-project-tag"><span>01</span> WEB</span>
+                      <span class="experience-project-tag"><span>01</span> COMMUNITY PLATFORM &amp; DIGITAL HUB</span>
+                      <span class="experience-project-hint">PREVIEW UI</span>
                       <span class="experience-project-arrow" aria-hidden="true">&#8599;</span>
                     </div>
                     <div class="experience-project-body">
-                      <p class="experience-project-type">PLATFORM DIGITAL</p>
-                      <h3>Platform e-commerce</h3>
-                      <p>Membangun pengalaman belanja berbasis web dengan alur yang jelas dan mudah digunakan.</p>
+                      <h3>Sentra Kreasi Digital Hub</h3>
+                      <p class="experience-project-subtitle">Regional UKM Community Portal and Local Business Directory</p>
+                      <p>A regional community landing page and digital hub designed to unite local micro, small, and medium enterprises across the Pameungpeuk region and surrounding areas. I architected a clean, accessible web platform that showcases local products, centralizes community information, and bridges traditional businesses with digital opportunities.</p>
+                      <ul class="experience-project-tags" aria-label="Technologies used">
+                        <li>NEXT.JS</li><li>TAILWIND CSS</li><li>COMMUNITY PORTAL</li><li>RESPONSIVE DESIGN</li><li>WEB PUBLISHING</li>
+                      </ul>
+                      <a class="experience-project-cta" href="#initiate">View Community Hub <span aria-hidden="true">&#8594;</span></a>
                     </div>
                     <span class="experience-project-index" aria-hidden="true">01</span>
                   </article>
-                  <article class="experience-project">
+                  <article class="experience-project" data-image="image_asset/gesture_eats.jpg" data-link="#initiate">
                     <div class="experience-project-meta">
-                      <span class="experience-project-tag"><span>02</span> INTERAKTIF</span>
+                      <span class="experience-project-tag"><span>02</span> INTERACTIVE KIOSK &amp; COMPUTER VISION</span>
+                      <span class="experience-project-hint">PREVIEW UI</span>
                       <span class="experience-project-arrow" aria-hidden="true">&#8599;</span>
                     </div>
                     <div class="experience-project-body">
-                      <p class="experience-project-type">INTERAKSI PENGGUNA</p>
-                      <h3>Kios berbasis gestur</h3>
-                      <p>Mengeksplorasi interaksi layar melalui gerakan pengguna untuk pengalaman yang lebih imersif.</p>
+                      <h3>Gesture Eats Touchless Kiosk</h3>
+                      <p class="experience-project-subtitle">Hand Tracking Self Service System for Culinary Outlets</p>
+                      <p>A touchless ordering kiosk built to modernize dining queues and hygiene at local culinary outlets. By combining MediaPipe computer vision for real time hand gesture navigation with digital signage and mobile payment sync, the system lets customers browse menus and complete orders without physical screen contact.</p>
+                      <ul class="experience-project-tags" aria-label="Technologies used">
+                        <li>MEDIAPIPE</li><li>COMPUTER VISION</li><li>WEB KIOSK</li><li>KATALON STUDIO</li><li>BPMN 2.0</li>
+                      </ul>
+                      <a class="experience-project-cta" href="#initiate">See How It Works <span aria-hidden="true">&#8594;</span></a>
                     </div>
                     <span class="experience-project-index" aria-hidden="true">02</span>
                   </article>
-                  <article class="experience-project">
+                  <article class="experience-project" data-image="image_asset/ngolab.png" data-link="https://pemesanan.ngolab.online/">
                     <div class="experience-project-meta">
-                      <span class="experience-project-tag"><span>03</span> KOMUNITAS</span>
+                      <span class="experience-project-tag"><span>03</span> WEB APPLICATION &amp; LOYALTY SYSTEM</span>
+                      <span class="experience-project-hint">PREVIEW UI</span>
                       <span class="experience-project-arrow" aria-hidden="true">&#8599;</span>
                     </div>
                     <div class="experience-project-body">
-                      <p class="experience-project-type">RUANG DIGITAL</p>
-                      <h3>Website komunitas</h3>
-                      <p>Menyediakan ruang untuk informasi, aktivitas, dan keterhubungan antaranggota komunitas.</p>
+                      <h3>Ngolab Member &amp; Loyalty App</h3>
+                      <p class="experience-project-subtitle">Customer Ordering Portal and Automated Point Rewards</p>
+                      <p>A dedicated web application engineered to streamline daily culinary orders and drive customer retention. I built the interactive menu ordering workflow, integrated real time transaction tracking, and designed a dynamic loyalty point engine that automatically rewards repeat buyers.</p>
+                      <ul class="experience-project-tags" aria-label="Technologies used">
+                        <li>NEXT.JS</li><li>REACT</li><li>TYPESCRIPT</li><li>TAILWIND CSS</li><li>SUPABASE</li>
+                      </ul>
+                      <a class="experience-project-cta" href="#initiate">View Live Platform <span aria-hidden="true">&#8594;</span></a>
                     </div>
                     <span class="experience-project-index" aria-hidden="true">03</span>
                   </article>
-                </div>
-                <div class="experience-footnote">
-                  <span>3 PROYEK PILIHAN &nbsp;&middot;&nbsp; SATU DEDIKASI</span>
-                  <span class="experience-footnote-center">E-COMMERCE <span class="strip-dot">&#9679;</span> INTERACTIVE KIOSK <span class="strip-dot">&#9679;</span> COMMUNITY WEB</span>
-                  <span class="experience-footnote-coord">PORTFOLIO &nbsp;&middot;&nbsp; 2025&mdash;26</span>
+                  <article class="experience-project" data-image="image_asset/maneki_strategy.png" data-link="#initiate">
+                    <div class="experience-project-meta">
+                      <span class="experience-project-tag"><span>04</span> CUSTOM CMS &amp; EDUCATIONAL PORTAL</span>
+                      <span class="experience-project-hint">PREVIEW UI</span>
+                      <span class="experience-project-arrow" aria-hidden="true">&#8599;</span>
+                    </div>
+                    <div class="experience-project-body">
+                      <h3>Maneki Strategy Platform</h3>
+                      <p class="experience-project-subtitle">Financial Literacy Portal and Custom Content Management</p>
+                      <p>A structured digital publishing platform focused on delivering accessible financial education. I architected a custom content management system that allows administrators to publish structured learning modules effortlessly while providing readers with a fast, distraction free reading experience across all devices.</p>
+                      <ul class="experience-project-tags" aria-label="Technologies used">
+                        <li>LARAVEL</li><li>TAILWIND CSS</li><li>ALPINE.JS</li><li>MYSQL</li><li>CUSTOM CMS</li>
+                      </ul>
+                      <a class="experience-project-cta" href="#initiate">Explore Platform <span aria-hidden="true">&#8594;</span></a>
+                    </div>
+                    <span class="experience-project-index" aria-hidden="true">04</span>
+                  </article>
+                  <article class="experience-project" data-image="image_asset/movr.png" data-link="#initiate">
+                    <div class="experience-project-meta">
+                      <span class="experience-project-tag"><span>05</span> DIGITAL COMMERCE &amp; MOBILE ECOSYSTEM</span>
+                      <span class="experience-project-hint">PREVIEW UI</span>
+                      <span class="experience-project-arrow" aria-hidden="true">&#8599;</span>
+                    </div>
+                    <div class="experience-project-body">
+                      <h3>MOVr Sportswear Platform</h3>
+                      <p class="experience-project-subtitle">Unified Mobile Storefront, Web Admin, and Automated Payment</p>
+                      <p>An integrated retail ecosystem designed to bridge mobile shopping with centralized inventory control. I engineered the RESTful API backend and relational database in Laravel, connected it to a fluid Flutter mobile app for customers, and built a web management dashboard featuring instant QRIS payment verification.</p>
+                      <ul class="experience-project-tags" aria-label="Technologies used">
+                        <li>LARAVEL</li><li>FLUTTER</li><li>DART</li><li>MYSQL</li><li>REST API</li>
+                      </ul>
+                      <a class="experience-project-cta" href="#initiate">Explore Case Study <span aria-hidden="true">&#8594;</span></a>
+                    </div>
+                    <span class="experience-project-index" aria-hidden="true">05</span>
+                  </article>
+                  <article class="experience-project" data-image="image_asset/ngolab_express.jpg" data-link="https://ngolab.online/">
+                    <div class="experience-project-meta">
+                      <span class="experience-project-tag"><span>06</span> CORPORATE BRANDING &amp; LIVING LAB PORTAL</span>
+                      <span class="experience-project-hint">PREVIEW UI</span>
+                      <span class="experience-project-arrow" aria-hidden="true">&#8599;</span>
+                    </div>
+                    <div class="experience-project-body">
+                      <h3>Ngolab Express Living Lab</h3>
+                      <p class="experience-project-subtitle">F&amp;B Innovation Showcase, Article Hub, and Partner Onboarding</p>
+                      <p>The official web presence for an F&amp;B innovation living lab that bridges student engineering talent with real world culinary enterprises. I translated the brand identity into a fast, high contrast portal featuring service showcases, article publishing, and digital onboarding for local business partners.</p>
+                      <ul class="experience-project-tags" aria-label="Technologies used">
+                        <li>WEB DEVELOPMENT</li><li>BRAND ARCHITECTURE</li><li>CONTENT HUB</li><li>TAILWIND CSS</li><li>SEO READY</li>
+                      </ul>
+                      <a class="experience-project-cta" href="#initiate">Open Living Lab <span aria-hidden="true">&#8594;</span></a>
+                    </div>
+                    <span class="experience-project-index" aria-hidden="true">06</span>
+                  </article>
+                  </div>
+                  <div class="project-carousel-bar">
+                    <p class="project-carousel-count"><strong>6</strong> FLAGSHIP PROJECTS &nbsp;&bull;&nbsp; END TO END EXECUTION</p>
+                    <div class="project-carousel-nav">
+                      <div class="project-carousel-dots" id="project-dots" aria-label="Project navigation"></div>
+                      <button class="project-carousel-btn" type="button" data-carousel-prev aria-label="Previous project">
+                        <span aria-hidden="true">&#8592;</span>
+                      </button>
+                      <button class="project-carousel-btn" type="button" data-carousel-next aria-label="Next project">
+                        <span aria-hidden="true">&#8594;</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
           </div>
+
           <div class="technologies-toolbar">
-            <div class="technology-filters" role="group" aria-label="Filter kategori teknologi" hidden>
-              <button type="button" class="technology-filter is-active" data-filter="all" aria-pressed="true" aria-controls="technology-list">Semua <span>18</span></button>
+            <div class="technology-filters" role="group" aria-label="Filter technology categories" hidden>
+              <button type="button" class="technology-filter is-active" data-filter="all" aria-pressed="true" aria-controls="technology-list">All <span>18</span></button>
               <button type="button" class="technology-filter" data-filter="frontend" aria-pressed="false" aria-controls="technology-list">Frontend <span>05</span></button>
               <button type="button" class="technology-filter" data-filter="backend" aria-pressed="false" aria-controls="technology-list">Backend <span>05</span></button>
               <button type="button" class="technology-filter" data-filter="mobile" aria-pressed="false" aria-controls="technology-list">Mobile <span>02</span></button>
               <button type="button" class="technology-filter" data-filter="tools" aria-pressed="false" aria-controls="technology-list">Tools <span>06</span></button>
             </div>
-            <p class="technology-results" role="status" aria-live="polite" aria-atomic="true">18 teknologi ditampilkan</p>
+            <p class="technology-results" role="status" aria-live="polite" aria-atomic="true">18 technologies shown</p>
           </div>
           <div class="technologies-workspace">
-          <ul class="technology-list" id="technology-list" aria-label="Daftar teknologi">
+          <ul class="technology-list" id="technology-list" aria-label="Technology list">
             <li class="technology-item" data-category="frontend">
-              <button class="technology-card" type="button" data-name="React" data-role="Antarmuka berbasis komponen" data-description="Membangun antarmuka interaktif dengan komponen yang dapat digunakan kembali." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="React" data-role="Component-based UI" data-description="Builds interactive interfaces from reusable components." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/react.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">React</span>
               </button>
             </li>
             <li class="technology-item" data-category="frontend">
-              <button class="technology-card" type="button" data-name="Next.js" data-role="Framework web" data-description="Mengembangkan aplikasi web dengan routing, rendering, dan struktur yang terintegrasi." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Next.js" data-role="Web framework" data-description="Develops web applications with integrated routing, rendering, and structure." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/nextjs.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Next.js</span>
               </button>
             </li>
             <li class="technology-item" data-category="frontend">
-              <button class="technology-card" type="button" data-name="TypeScript" data-role="JavaScript dengan tipe" data-description="Menjaga alur data dan kode lebih jelas melalui pemeriksaan tipe." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="TypeScript" data-role="Typed JavaScript" data-description="Keeps data flow and code clear through static type checking." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/typescript.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">TypeScript</span>
               </button>
             </li>
             <li class="technology-item" data-category="frontend">
-              <button class="technology-card" type="button" data-name="JavaScript" data-role="Interaksi &amp; logika" data-description="Menghidupkan interaksi dan menjalankan logika aplikasi di browser maupun server." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="JavaScript" data-role="Interaction &amp; logic" data-description="Powers interaction and runs application logic in the browser and on the server." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/javascript.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">JavaScript</span>
               </button>
             </li>
             <li class="technology-item" data-category="frontend">
-              <button class="technology-card" type="button" data-name="Tailwind CSS" data-role="Styling antarmuka" data-description="Menyusun tampilan responsif dan konsisten menggunakan utility classes." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Tailwind CSS" data-role="Interface styling" data-description="Composes responsive, consistent layouts with utility classes." data-category-label="FRONTEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/tailwindcss.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Tailwind CSS</span>
               </button>
             </li>
             <li class="technology-item" data-category="backend">
-              <button class="technology-card" type="button" data-name="Laravel" data-role="Framework backend" data-description="Membangun layanan aplikasi, autentikasi, dan pengelolaan data." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Laravel" data-role="Backend framework" data-description="Builds application services, authentication, and data management." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/laravel.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Laravel</span>
               </button>
             </li>
             <li class="technology-item" data-category="backend">
-              <button class="technology-card" type="button" data-name="Node.js" data-role="JavaScript di server" data-description="Menjalankan logika server dan menghubungkan aplikasi dengan layanan lain." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Node.js" data-role="JavaScript on the server" data-description="Runs server-side logic and connects the application to other services." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/nodejs.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Node.js</span>
               </button>
             </li>
             <li class="technology-item" data-category="backend">
-              <button class="technology-card" type="button" data-name="Express.js" data-role="API &amp; routing" data-description="Menyusun endpoint API, middleware, dan alur request pada server." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Express.js" data-role="API &amp; routing" data-description="Composes API endpoints, middleware, and request flow on the server." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/express.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Express.js</span>
               </button>
             </li>
             <li class="technology-item" data-category="backend">
-              <button class="technology-card" type="button" data-name="MySQL" data-role="Database relasional" data-description="Menata data, relasi, dan query untuk kebutuhan aplikasi." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="MySQL" data-role="Relational database" data-description="Organizes data, relations, and queries for application needs." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/mysql.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">MySQL</span>
               </button>
             </li>
             <li class="technology-item" data-category="backend">
-              <button class="technology-card" type="button" data-name="Supabase" data-role="Layanan backend" data-description="Mengintegrasikan database, autentikasi, dan penyimpanan dalam aplikasi." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Supabase" data-role="Backend service" data-description="Integrates database, authentication, and storage into the application." data-category-label="BACKEND" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/supabase.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Supabase</span>
               </button>
             </li>
             <li class="technology-item" data-category="mobile">
-              <button class="technology-card" type="button" data-name="Flutter" data-role="Aplikasi lintas platform" data-description="Membangun pengalaman mobile dengan antarmuka yang konsisten." data-category-label="MOBILE" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Flutter" data-role="Cross-platform apps" data-description="Builds mobile experiences with a consistent interface." data-category-label="MOBILE" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/flutter.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Flutter</span>
               </button>
             </li>
             <li class="technology-item" data-category="mobile">
-              <button class="technology-card" type="button" data-name="Dart" data-role="Bahasa untuk Flutter" data-description="Menyusun logika, state, dan interaksi dalam aplikasi Flutter." data-category-label="MOBILE" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Dart" data-role="Language for Flutter" data-description="Structures logic, state, and interaction in Flutter applications." data-category-label="MOBILE" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/dart.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Dart</span>
               </button>
             </li>
             <li class="technology-item" data-category="tools">
-              <button class="technology-card" type="button" data-name="Git" data-role="Kontrol versi" data-description="Melacak perubahan kode dan mengelola pekerjaan dalam beberapa branch." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Git" data-role="Version control" data-description="Tracks code changes and manages work across multiple branches." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/git.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Git</span>
               </button>
             </li>
             <li class="technology-item" data-category="tools">
-              <button class="technology-card" type="button" data-name="GitHub" data-role="Kolaborasi kode" data-description="Mengelola repository dan berkolaborasi dalam pengembangan proyek." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="GitHub" data-role="Code collaboration" data-description="Manages repositories and collaborates on project development." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/github.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">GitHub</span>
               </button>
             </li>
             <li class="technology-item" data-category="tools">
-              <button class="technology-card" type="button" data-name="Postman" data-role="Pengujian API" data-description="Mengeksplorasi endpoint serta memeriksa request dan response API." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Postman" data-role="API testing" data-description="Explores endpoints and inspects API requests and responses." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/postman.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Postman</span>
               </button>
             </li>
             <li class="technology-item" data-category="tools">
-              <button class="technology-card" type="button" data-name="Laragon" data-role="Lingkungan lokal" data-description="Menyiapkan lingkungan pengembangan dan menjalankan aplikasi secara lokal." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Laragon" data-role="Local environment" data-description="Prepares the development environment and runs applications locally." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/laragon.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Laragon</span>
               </button>
             </li>
             <li class="technology-item" data-category="tools">
-              <button class="technology-card" type="button" data-name="Cloudflare Pages" data-role="Publikasi website" data-description="Mempublikasikan website dan aplikasi web agar dapat diakses pengguna." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Cloudflare Pages" data-role="Website publishing" data-description="Publishes websites and web applications so users can access them." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/cloudflarepages.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Cloudflare Pages</span>
               </button>
             </li>
             <li class="technology-item" data-category="tools">
-              <button class="technology-card" type="button" data-name="Vercel" data-role="Deployment aplikasi" data-description="Menerbitkan aplikasi web dan meninjau perubahan melalui preview deployment." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
+              <button class="technology-card" type="button" data-name="Vercel" data-role="Application deployment" data-description="Ships web applications and reviews changes through preview deployments." data-category-label="TOOLS &amp; DEPLOYMENT" aria-pressed="false" aria-controls="technology-detail">
                 <span class="technology-logo"><img src="assets/tech-stack/vercel.svg" width="24" height="24" alt="" loading="lazy" /></span>
                 <span class="technology-name">Vercel</span>
               </button>
             </li>
           </ul>
-            <aside class="technology-detail" id="technology-detail" aria-label="Informasi teknologi">
-              <p class="technology-detail-kicker">KENALI TEKNOLOGINYA</p>
+            <aside class="technology-detail" id="technology-detail" aria-label="Technology information">
+              <p class="technology-detail-kicker">TECHNOLOGY DETAIL</p>
               <div class="technology-detail-empty">
                 <span class="technology-detail-symbol" aria-hidden="true">&lt;/&gt;</span>
-                <h3>Di balik setiap karya.</h3>
-                <p>Arahkan kursor atau klik salah satu teknologi untuk melihat penggunaannya.</p>
+                <h3>Behind every build.</h3>
+                <p>Hover or click any technology to see how it is used.</p>
               </div>
               <div class="technology-detail-content" hidden>
                 <div class="technology-detail-heading">
@@ -373,147 +661,187 @@
                 </div>
                 <p class="technology-detail-role" id="technology-detail-role"></p>
                 <p class="technology-detail-description" id="technology-detail-description"></p>
-                <div class="technology-detail-foot"><span>PENGGUNAAN DALAM PROYEK</span><span aria-hidden="true">&#8599;</span></div>
+                <div class="technology-detail-foot"><span>USED IN PROJECTS</span><span aria-hidden="true">&#8599;</span></div>
               </div>
               <span class="technology-selection-status" role="status" aria-live="polite" aria-atomic="true"></span>
             </aside>
           </div>
-          <div class="technologies-footer">
-            <p>Terus belajar. Terus mencoba. Terus berkarya.</p>
-            <a href="#contact">Mari berkolaborasi <span aria-hidden="true">&#8599;</span></a>
-          </div>
         </div>
       </section>
 
-      <section class="contact-section" id="contact" aria-labelledby="contact-title">
-        <div class="contact-inner">
-          <div class="contact-section-heading">
-            <p class="contact-eyebrow" id="contact-title"><span>05</span> KONTAK &amp; KOLABORASI</p>
-            <span class="contact-section-note">MARI TERHUBUNG</span>
+      <section class="workflow-section" id="workflow" aria-labelledby="workflow-title">
+        <div class="workflow-inner">
+          <div class="workflow-topline">
+            <p class="workflow-eyebrow"><span>05</span> ENGINEERING &amp; WORKFLOW</p>
+            <span class="workflow-topline-note">HOW I DELIVER VALUE</span>
           </div>
 
-          <div class="contact-header">
-            <div>
-              <h2>Punya ide menarik?<br /><span class="headline-accent">Mari wujudkan bersama.</span></h2>
-            </div>
-            <div class="contact-header-copy">
-              <p class="contact-intro-text">Saya terbuka untuk proyek baru, kerja sama tim, freelance, atau sekadar berdiskusi seputar teknologi dan inovasi produk digital.</p>
-              <div class="contact-status-card">
-                <span class="availability-dot" aria-hidden="true"></span>
-                <div>
-                  <strong>TERBUKA UNTUK KOLABORASI</strong>
-                  <span>WAKTU RESPON BIASANYA &lt; 24 JAM</span>
-                </div>
-              </div>
-            </div>
+          <div class="workflow-headline">
+            <h2 id="workflow-title">How I bring <span class="workflow-mark">systems</span> to life.</h2>
+            <p class="workflow-headline-sub">Six connected disciplines, one delivery path. Hover or select any pillar to inspect how each stage of the work is executed.</p>
           </div>
 
-          <div class="contact-grid">
-            <div class="contact-channels">
-              <div class="channel-card">
-                <div class="channel-top">
-                  <span class="channel-label">SALURAN UTAMA</span>
-                  <span class="channel-badge">PRIORITAS</span>
-                </div>
-                <p class="channel-val">fahmif3211@gmail.com</p>
-                <div class="channel-actions">
-                  <a class="channel-btn primary" href="mailto:fahmif3211@gmail.com">Kirim Email <span aria-hidden="true">&#8599;</span></a>
-                  <button type="button" class="channel-btn" id="copy-email-btn">Salin Email</button>
-                </div>
-              </div>
-
-              <div class="channel-card">
-                <div class="channel-top">
-                  <span class="channel-label">LOKASI &amp; WAKTU KERJA</span>
-                  <span class="channel-badge">WIB · UTC+7</span>
-                </div>
-                <p class="channel-val">Bandung, Jawa Barat</p>
-                <p class="channel-time-display"><span class="strip-dot" aria-hidden="true">&#9679;</span> Waktu lokal saat ini: <strong id="contact-local-time">--:--:-- WIB</strong></p>
-              </div>
-
-              <div class="channel-socials">
-                <a class="social-link" href="https://github.com/f4hmii" target="_blank" rel="noopener noreferrer">
-                  <span>GitHub</span>
-                  <span aria-hidden="true">&#8599;</span>
-                </a>
-                <a class="social-link" href="https://www.linkedin.com/in/zulfahmi-2b6561325" target="_blank" rel="noopener noreferrer">
-                  <span>LinkedIn</span>
-                  <span aria-hidden="true">&#8599;</span>
-                </a>
-                <a class="social-link" href="https://instagram.com/f4hmmii" target="_blank" rel="noopener noreferrer">
-                  <span>Instagram</span>
-                  <span aria-hidden="true">&#8599;</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="contact-form-card">
-              <div class="form-heading">
-                <h3>Kirim Pesan Langsung</h3>
-                <p>Punya tawaran proyek atau ingin berdiskusi? Tulis detail kebutuhan Anda di bawah ini.</p>
-              </div>
-              <form class="contact-form" id="contact-form">
-                <div class="form-group">
-                  <label class="form-label" for="sender-name">Nama Lengkap</label>
-                  <input class="form-input" type="text" id="sender-name" name="name" placeholder="Nama Anda atau Perusahaan" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="sender-email">Alamat Email</label>
-                  <input class="form-input" type="email" id="sender-email" name="email" placeholder="nama@email.com" required />
-                </div>
-                <div class="form-group">
-                  <span class="form-label">Kategori Kebutuhan</span>
-                  <div class="form-services" role="group" aria-label="Pilih kategori kebutuhan">
-                    <label class="service-pill">
-                      <input type="radio" name="service" value="Website & Web App" checked />
-                      <span>Web Development</span>
-                    </label>
-                    <label class="service-pill">
-                      <input type="radio" name="service" value="Mobile App" />
-                      <span>Mobile App</span>
-                    </label>
-                    <label class="service-pill">
-                      <input type="radio" name="service" value="Backend & API" />
-                      <span>Backend &amp; API</span>
-                    </label>
-                    <label class="service-pill">
-                      <input type="radio" name="service" value="Lainnya" />
-                      <span>Lainnya</span>
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="sender-message">Pesan / Detail Proyek</label>
-                  <textarea class="form-textarea" id="sender-message" name="message" placeholder="Ceritakan ringkasan ide, target waktu, atau kebutuhan yang ingin Anda bangun..." required></textarea>
-                </div>
-                <button type="submit" class="contact-submit-btn">
-                  <span>Kirim Pesan</span>
-                  <span class="arrow-circle" aria-hidden="true">&#8599;</span>
+          <div class="workflow-grid">
+            <div class="workflow-col workflow-col-left">
+                <button class="workflow-pillar" type="button" data-pillar="01" aria-controls="workflow-panel-01" aria-pressed="false">
+                  <span class="workflow-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="6" height="5" rx="1.4"/><rect x="15" y="16" width="6" height="5" rx="1.4"/><rect x="9" y="9.5" width="6" height="5" rx="1.4"/><path d="M6 8v3.5h3M15 12h3v4"/></svg></span>
+                  <span class="workflow-pillar-text">
+                    <span class="workflow-pillar-title">Process &amp; System Design</span>
+                    <span class="workflow-pillar-sub">Workflow Mapping &amp; Schemas</span>
+                  </span>
                 </button>
-                <p class="form-feedback" id="form-feedback" role="status" aria-live="polite" hidden></p>
-              </form>
+                <button class="workflow-pillar" type="button" data-pillar="02" aria-controls="workflow-panel-02" aria-pressed="false">
+                  <span class="workflow-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="6" rx="1.6"/><rect x="3" y="14" width="18" height="6" rx="1.6"/><path d="M7 7h.01M7 17h.01M11 7h5M11 17h5"/></svg></span>
+                  <span class="workflow-pillar-text">
+                    <span class="workflow-pillar-title">Backend &amp; API Architecture</span>
+                    <span class="workflow-pillar-sub">Server Logic &amp; Data Flow</span>
+                  </span>
+                </button>
+                <button class="workflow-pillar" type="button" data-pillar="03" aria-controls="workflow-panel-03" aria-pressed="false">
+                  <span class="workflow-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/><path d="M6.5 12.5h6v4h-6z"/></svg></span>
+                  <span class="workflow-pillar-text">
+                    <span class="workflow-pillar-title">Web Dashboards &amp; Portals</span>
+                    <span class="workflow-pillar-sub">Operational &amp; Content Systems</span>
+                  </span>
+                </button>
+            </div>
+
+            <div class="workflow-col workflow-center">
+              <div class="workflow-inspector">
+                <div class="workflow-inspector-glow" aria-hidden="true"></div>
+                <button class="workflow-reset" type="button" id="workflow-reset" hidden>RESET VIEW</button>
+                <div class="workflow-inspector-stage" id="workflow-stage">
+              <div class="workflow-panel is-active" id="workflow-panel-default" role="tabpanel" aria-label="Core engineering philosophy" aria-hidden="false">
+                <p class="workflow-panel-label">CORE ENGINEERING PHILOSOPHY</p>
+                <p class="workflow-panel-lead">I engineer reliable applications with clean architecture, modern frameworks, <span class="is-muted">and structured testing that turn complex workflows into working software.</span></p>
+                <p class="workflow-panel-foot">HOVER OR SELECT ANY PILLAR TO INSPECT THE WORKFLOW</p>
+              </div>
+              <div class="workflow-panel" id="workflow-panel-01" role="tabpanel" aria-labelledby="workflow-pillar-01" aria-hidden="true">
+                <p class="workflow-panel-label">01 / PROCESS MAPPING &amp; SYSTEM DESIGN</p>
+                <p class="workflow-panel-lead">Every solid application starts before the first line of code is written.</p>
+                <p class="workflow-panel-copy">I translate raw business requirements into clear BPMN 2.0 workflows, structured relational database schemas, and intuitive wireframes.</p>
+                <ul class="workflow-panel-tags" aria-label="Deliverables"><li>BPMN 2.0</li><li>DATABASE SCHEMA</li><li>SYSTEM ARCHITECTURE</li></ul>
+              </div>
+              <div class="workflow-panel" id="workflow-panel-02" role="tabpanel" aria-labelledby="workflow-pillar-02" aria-hidden="true">
+                <p class="workflow-panel-label">02 / BACKEND &amp; API ARCHITECTURE</p>
+                <p class="workflow-panel-lead">Building the core engine that keeps business data secure and fast.</p>
+                <p class="workflow-panel-copy">I architect RESTful APIs, authentication layers, and optimized SQL queries so information flows reliably between server and screen.</p>
+                <ul class="workflow-panel-tags" aria-label="Deliverables"><li>RESTFUL API</li><li>SQL OPTIMIZATION</li><li>AUTH &amp; SECURITY</li></ul>
+              </div>
+              <div class="workflow-panel" id="workflow-panel-03" role="tabpanel" aria-labelledby="workflow-pillar-03" aria-hidden="true">
+                <p class="workflow-panel-label">03 / RESPONSIVE WEB DASHBOARDS</p>
+                <p class="workflow-panel-lead">Turning complex operational data into clean, actionable web interfaces.</p>
+                <p class="workflow-panel-copy">From admin management panels and custom CMS platforms to interactive customer portals, I build web views that run smoothly on any browser.</p>
+                <ul class="workflow-panel-tags" aria-label="Deliverables"><li>ADMIN PANELS</li><li>CUSTOM CMS</li><li>WEB PLATFORMS</li></ul>
+              </div>
+              <div class="workflow-panel" id="workflow-panel-04" role="tabpanel" aria-labelledby="workflow-pillar-04" aria-hidden="true">
+                <p class="workflow-panel-label">04 / MULTIPLATFORM MOBILE APPS</p>
+                <p class="workflow-panel-lead">Delivering native performance mobile experiences from a single codebase.</p>
+                <p class="workflow-panel-copy">I compile fluid, responsive mobile applications using Flutter and Dart, complete with clean state management and seamless API synchronization.</p>
+                <ul class="workflow-panel-tags" aria-label="Deliverables"><li>FLUTTER &amp; DART</li><li>MOBILE UI</li><li>REAL TIME SYNC</li></ul>
+              </div>
+              <div class="workflow-panel" id="workflow-panel-05" role="tabpanel" aria-labelledby="workflow-pillar-05" aria-hidden="true">
+                <p class="workflow-panel-label">05 / AUTOMATED QUALITY TESTING</p>
+                <p class="workflow-panel-lead">Ensuring every feature holds up under real world user scenarios.</p>
+                <p class="workflow-panel-copy">Before shipping to production, I validate API payloads in Postman and run automated black box test suites using Katalon Studio to eliminate bugs early.</p>
+                <ul class="workflow-panel-tags" aria-label="Deliverables"><li>KATALON STUDIO</li><li>API VALIDATION</li><li>AUTOMATED QA</li></ul>
+              </div>
+              <div class="workflow-panel" id="workflow-panel-06" role="tabpanel" aria-labelledby="workflow-pillar-06" aria-hidden="true">
+                <p class="workflow-panel-label">06 / DEPLOYMENT &amp; CLOUD INTEGRATION</p>
+                <p class="workflow-panel-lead">Connecting external services and shipping cleanly to production servers.</p>
+                <p class="workflow-panel-copy">I integrate digital payment gateways like QRIS, configure DNS and edge caching on Cloudflare, and deploy applications for reliable uptime.</p>
+                <ul class="workflow-panel-tags" aria-label="Deliverables"><li>CLOUD DEPLOYMENT</li><li>QRIS INTEGRATION</li><li>EDGE HOSTING</li></ul>
+              </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="workflow-col workflow-col-right">
+                <button class="workflow-pillar" type="button" data-pillar="04" aria-controls="workflow-panel-04" aria-pressed="false">
+                  <span class="workflow-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M10.5 5.5h3M11 18.5h2"/></svg></span>
+                  <span class="workflow-pillar-text">
+                    <span class="workflow-pillar-title">Multiplatform Mobile Apps</span>
+                    <span class="workflow-pillar-sub">Android &amp; iOS Execution</span>
+                  </span>
+                </button>
+                <button class="workflow-pillar" type="button" data-pillar="05" aria-controls="workflow-panel-05" aria-pressed="false">
+                  <span class="workflow-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.4c0 4.3-2.9 7.5-7 9.1-4.1-1.6-7-4.8-7-9.1V6l7-3z"/><path d="M9 12.2l2.1 2.1 4-4.1"/></svg></span>
+                  <span class="workflow-pillar-text">
+                    <span class="workflow-pillar-title">Automated Quality Testing</span>
+                    <span class="workflow-pillar-sub">Validation &amp; Scenario QA</span>
+                  </span>
+                </button>
+                <button class="workflow-pillar" type="button" data-pillar="06" aria-controls="workflow-panel-06" aria-pressed="false">
+                  <span class="workflow-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.2 18.5A4.2 4.2 0 016.6 10a5.5 5.5 0 0110.6 1.3 3.7 3.7 0 01.4 7.2"/><path d="M12 10.5v6M9.6 14.2L12 16.6l2.4-2.4"/></svg></span>
+                  <span class="workflow-pillar-text">
+                    <span class="workflow-pillar-title">Cloud &amp; System Integration</span>
+                    <span class="workflow-pillar-sub">Deployment &amp; Third Party Sync</span>
+                  </span>
+                </button>
             </div>
           </div>
         </div>
       </section>
+
+
+
+      <section class="initiate-section" id="initiate" aria-labelledby="initiate-title">
+        <div class="initiate-inner">
+          <div class="initiate-topline">
+            <p class="initiate-eyebrow"><span>06</span> CONTACT</p>
+            <span class="initiate-topline-note">INITIATE A PROJECT</span>
+          </div>
+
+          <div class="initiate-panel">
+            <p class="initiate-kicker">OPEN FOR NEW ENGAGEMENTS</p>
+            <h2 class="initiate-title" id="initiate-title">Ready to build working software?</h2>
+            <p class="initiate-copy">Let us talk architecture, execution, and how we can bring your next product to life.</p>
+
+            <ul class="initiate-actions" aria-label="Ways to get in touch">
+              <li>
+                <a class="initiate-pill is-primary" href="mailto:zulfahmi@zulfahmi.web.id">
+                  <span>SEND AN EMAIL</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
+                </a>
+              </li>
+              <li>
+                <a class="initiate-pill" href="https://www.linkedin.com/in/zulfahmi-2b6561325" target="_blank" rel="noopener noreferrer">
+                  <span>CONNECT ON LINKEDIN</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
+                </a>
+              </li>
+              <li>
+                <a class="initiate-pill" href="https://github.com/f4hmii" target="_blank" rel="noopener noreferrer">
+                  <span>EXPLORE GITHUB</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
+                </a>
+              </li>
+              <li>
+                <a class="initiate-pill" href="assets/resume/zulfahmi-resume.pdf" download="zulfahmi-resume.pdf">
+                  <span>DOWNLOAD RESUME</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <footer class="main-footer">
       <div class="footer-inner">
         <div class="footer-top">
-          <a class="wordmark" href="#home" aria-label="ZULFAHMI, beranda">ZULFAHMI</a>
-          <nav class="footer-nav" aria-label="Navigasi footer">
-            <a href="#home">Beranda</a>
-            <a href="#about">Tentang</a>
-            <a href="#stack">Teknologi</a>
-            <a href="#experience-projects">Pengalaman</a>
-            <a href="#contact">Kontak</a>
+          <a class="wordmark" href="#home" aria-label="ZULFAHMI, home">ZULFAHMI</a>
+          <nav class="footer-nav" aria-label="Footer navigation">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#stack">Tech Stack</a>
+            <a href="#experience-projects">Works</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#initiate">Contact</a>
           </nav>
-          <a href="#home" class="back-to-top">KEMBALI KE ATAS <span aria-hidden="true">&#8593;</span></a>
+          <a href="#home" class="back-to-top">BACK TO TOP <span aria-hidden="true">&#8593;</span></a>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2025&mdash;2026 Zulfahmi. Didesain dengan rasa, dibangun dengan tujuan.</p>
-          <span class="footer-coords">BANDUNG, JAWA BARAT &nbsp;&middot;&nbsp; 06&deg;55' S &nbsp; 107&deg;36' E</span>
+          <p>&copy; 2026 Zulfahmi. Built with clean code and modern frameworks.</p>
+          <span class="footer-coords">DESIGNED FOR HIGH SIGNAL PERFORMANCE</span>
         </div>
       </div>
     </footer>
@@ -526,6 +854,90 @@
     <script src="vendor/three-0.166.1.js"></script>
     <script src="script.js"></script>
     <script src="scroll-motion.js"></script>
-    <script src="contact.js"></script>
+    <script src="project-carousel.js"></script>
+    <script src="workflow.js"></script>
+    <script>
+      (function() {
+        const rotator = document.querySelector('.role-rotator');
+        if (!rotator) return;
+        const words = rotator.querySelectorAll('.role-word');
+        if (words.length < 2) return;
+        let current = 0;
+        function updateWidth() {
+          const active = words[current];
+          rotator.style.width = active.offsetWidth + 'px';
+        }
+        updateWidth();
+        window.addEventListener('resize', updateWidth);
+        setInterval(function() {
+          const prev = current;
+          current = (current + 1) % words.length;
+          words[prev].classList.add('is-exiting');
+          words[prev].classList.remove('is-active');
+          setTimeout(function() {
+            words[prev].classList.remove('is-exiting');
+          }, 460);
+          words[current].classList.add('is-active');
+          updateWidth();
+        }, 2500);
+      })();
+    </script>
+    <script>
+      (function() {
+        const toggle = document.getElementById('navbar-toggle');
+        const topbar = document.querySelector('.topbar');
+        const icon = toggle.querySelector('.toggle-icon');
+        if (!toggle || !topbar) return;
+
+        const ICON_COLLAPSE = '\u2039';   // ‹  -> tutup navbar
+        const ICON_EXPAND = '\u2630';     // ☰  -> buka navbar
+        const navLinks = topbar.querySelectorAll('.nav-link');
+
+        function setIcon(glyph) {
+          icon.innerHTML = glyph;
+          icon.classList.remove('is-swap');
+          void icon.offsetWidth;            // paksa reflow agar animasi restart
+          icon.classList.add('is-swap');
+        }
+
+        function setCollapsed(collapsed, animate) {
+          topbar.classList.toggle('is-collapsed', collapsed);
+          document.body.classList.toggle('nav-collapsed', collapsed);
+          if (animate === false) {
+            icon.innerHTML = collapsed ? ICON_EXPAND : ICON_COLLAPSE;
+          } else {
+            setIcon(collapsed ? ICON_EXPAND : ICON_COLLAPSE);
+          }
+          toggle.setAttribute('aria-expanded', String(!collapsed));
+          toggle.setAttribute('aria-label', collapsed ? 'Open navigation' : 'Close navigation');
+        }
+
+        // Navbar tersembunyi saat halaman pertama dibuka; hanya hamburger yang tampil.
+        // Sinkronkan status awal tanpa animasi agar tidak ada kedipan.
+        setCollapsed(topbar.classList.contains('is-collapsed'), false);
+
+        toggle.addEventListener('click', function() {
+          setCollapsed(!topbar.classList.contains('is-collapsed'));
+        });
+
+        // Di layar kecil, tutup navbar otomatis setelah memilih menu
+        const narrowScreen = window.matchMedia('(max-width: 680px)');
+        navLinks.forEach(function(link) {
+          link.addEventListener('click', function() {
+            if (narrowScreen.matches && !topbar.classList.contains('is-collapsed')) {
+              setCollapsed(true);
+            }
+          });
+        });
+
+        // Tombol Escape juga menutup navbar
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape' && !topbar.classList.contains('is-collapsed')) {
+            setCollapsed(true);
+            toggle.focus();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

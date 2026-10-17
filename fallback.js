@@ -1,29 +1,55 @@
 ﻿const stack = [
-  { name: "Supabase", mark: "SB", color: "#55d5a0", category: "BACKEND AS A SERVICE", level: "DIKUASAI", score: 85, description: "Membangun backend aplikasi dengan database, autentikasi, dan layanan Supabase." },
-  { name: "MySQL", mark: "SQL", color: "#61a8d8", category: "RELATIONAL DATABASE", level: "DIKUASAI", score: 85, description: "Mengelola data relasional dan query untuk kebutuhan aplikasi." },
-  { name: "React", mark: "⚛", color: "#67dff5", category: "FRONTEND LIBRARY", level: "DIKUASAI", score: 85, description: "Membangun antarmuka responsif dan interaktif dengan komponen." },
-  { name: "Next.js", mark: "N", color: "#f1f0e9", category: "REACT FRAMEWORK", level: "DIKUASAI", score: 85, description: "Mengembangkan aplikasi web berbasis React dengan routing dan rendering modern." },
-  { name: "TypeScript", mark: "TS", color: "#579bfa", category: "TYPED JAVASCRIPT", level: "DIKUASAI", score: 85, description: "Menulis JavaScript dengan tipe yang membantu menjaga kode tetap jelas." },
-  { name: "JavaScript", mark: "JS", color: "#e8cd58", category: "PROGRAMMING LANGUAGE", level: "DIKUASAI", score: 85, description: "Mengembangkan interaksi dan logika aplikasi di web maupun server." },
-  { name: "Tailwind CSS", mark: "TW", color: "#55d5d0", category: "CSS FRAMEWORK", level: "DIKUASAI", score: 85, description: "Membangun tampilan konsisten menggunakan utility classes." },
-  { name: "Flutter", mark: "FL", color: "#69b9f5", category: "CROSS-PLATFORM UI", level: "DIKUASAI", score: 85, description: "Membangun aplikasi lintas platform dengan satu basis kode." },
-  { name: "Dart", mark: "D", color: "#58b8cc", category: "PROGRAMMING LANGUAGE", level: "DIKUASAI", score: 85, description: "Mengembangkan aplikasi menggunakan bahasa Dart, termasuk untuk Flutter." },
-  { name: "Laravel", mark: "L", color: "#f06c63", category: "PHP FRAMEWORK", level: "DIKUASAI", score: 85, description: "Membangun aplikasi backend dengan ekosistem Laravel." },
-  { name: "Node.js", mark: "JS", color: "#a8cf67", category: "JAVASCRIPT RUNTIME", level: "DIKUASAI", score: 85, description: "Menjalankan JavaScript di server untuk membangun layanan aplikasi." },
-  { name: "Express.js", mark: "EX", color: "#d4d8cf", category: "NODE.JS FRAMEWORK", level: "DIKUASAI", score: 85, description: "Membuat API dan aplikasi web server dengan framework Express." },
-  { name: "Cloudflare Pages", mark: "CF", color: "#f3a75a", category: "WEB HOSTING", level: "DIKUASAI", score: 85, description: "Mempublikasikan website dan aplikasi web melalui Cloudflare Pages." },
-  { name: "Vercel", mark: "V", color: "#f1f0e9", category: "WEB HOSTING", level: "DIKUASAI", score: 85, description: "Mendeploy aplikasi web melalui platform Vercel." },
-  { name: "Git", mark: "G", color: "#ee795e", category: "VERSION CONTROL", level: "DIKUASAI", score: 85, description: "Melacak perubahan kode dan mengelola riwayat pengembangan." },
-  { name: "GitHub", mark: "GH", color: "#e7e8e0", category: "CODE COLLABORATION", level: "DIKUASAI", score: 85, description: "Menyimpan repository dan berkolaborasi pada proyek perangkat lunak." },
-  { name: "Postman", mark: "PM", color: "#f18c55", category: "API DEVELOPMENT", level: "DIKUASAI", score: 85, description: "Menguji dan mengelola request API selama pengembangan." },
-  { name: "Laragon", mark: "LA", color: "#7bbd8b", category: "LOCAL DEVELOPMENT", level: "DIKUASAI", score: 85, description: "Menyiapkan lingkungan pengembangan lokal untuk aplikasi web." },
+  { name: "Supabase", mark: "SB", color: "#55d5a0", category: "BACKEND AS A SERVICE", level: "PROFICIENT", score: 85, description: "Building application backends with databases, authentication, and Supabase services." },
+  { name: "MySQL", mark: "SQL", color: "#61a8d8", category: "RELATIONAL DATABASE", level: "PROFICIENT", score: 85, description: "Managing relational data and queries for application requirements." },
+  { name: "React", mark: "⚛", color: "#67dff5", category: "FRONTEND LIBRARY", level: "PROFICIENT", score: 85, description: "Building responsive, interactive interfaces from reusable components." },
+  { name: "Next.js", mark: "N", color: "#f1f0e9", category: "REACT FRAMEWORK", level: "PROFICIENT", score: 85, description: "Developing React web applications with modern routing and rendering." },
+  { name: "TypeScript", mark: "TS", color: "#579bfa", category: "TYPED JAVASCRIPT", level: "PROFICIENT", score: 85, description: "Writing JavaScript with types that keep the codebase clear and predictable." },
+  { name: "JavaScript", mark: "JS", color: "#e8cd58", category: "PROGRAMMING LANGUAGE", level: "PROFICIENT", score: 85, description: "Developing interaction and application logic on both the web and the server." },
+  { name: "Tailwind CSS", mark: "TW", color: "#55d5d0", category: "CSS FRAMEWORK", level: "PROFICIENT", score: 85, description: "Building consistent interfaces with utility classes." },
+  { name: "Flutter", mark: "FL", color: "#69b9f5", category: "CROSS-PLATFORM UI", level: "PROFICIENT", score: 85, description: "Building cross platform applications from a single codebase." },
+  { name: "Dart", mark: "D", color: "#58b8cc", category: "PROGRAMMING LANGUAGE", level: "PROFICIENT", score: 85, description: "Developing applications in the Dart language, including for Flutter." },
+  { name: "Laravel", mark: "L", color: "#f06c63", category: "PHP FRAMEWORK", level: "PROFICIENT", score: 85, description: "Building backend applications with the Laravel ecosystem." },
+  { name: "Node.js", mark: "JS", color: "#a8cf67", category: "JAVASCRIPT RUNTIME", level: "PROFICIENT", score: 85, description: "Running JavaScript on the server to build application services." },
+  { name: "Express.js", mark: "EX", color: "#d4d8cf", category: "NODE.JS FRAMEWORK", level: "PROFICIENT", score: 85, description: "Creating APIs and web server applications with the Express framework." },
+  { name: "Cloudflare Pages", mark: "CF", color: "#f3a75a", category: "WEB HOSTING", level: "PROFICIENT", score: 85, description: "Publishing websites and web applications through Cloudflare Pages." },
+  { name: "Vercel", mark: "V", color: "#f1f0e9", category: "WEB HOSTING", level: "PROFICIENT", score: 85, description: "Deploying web applications through the Vercel platform." },
+  { name: "Git", mark: "G", color: "#ee795e", category: "VERSION CONTROL", level: "PROFICIENT", score: 85, description: "Tracking code changes and managing the development history." },
+  { name: "GitHub", mark: "GH", color: "#e7e8e0", category: "CODE COLLABORATION", level: "PROFICIENT", score: 85, description: "Hosting repositories and collaborating on software projects." },
+  { name: "Postman", mark: "PM", color: "#f18c55", category: "API DEVELOPMENT", level: "PROFICIENT", score: 85, description: "Testing and managing API requests during development." },
+  { name: "Laragon", mark: "LA", color: "#7bbd8b", category: "LOCAL DEVELOPMENT", level: "PROFICIENT", score: 85, description: "Preparing local development environments for web applications." },
 ];
 
+// Brand logos are drawn in their own brand colour, so every tech cap carries a
+// light legend plate to keep the mark readable on top of the coloured cap.
 const keycapColors = [
-  "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9",
-  "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9",
-  "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9", "#f2efd9",
+  "#3ecf8e", // Supabase — Emerald Green
+  "#00758f", // MySQL — Dolphin Blue (accent #f29111)
+  "#61dafb", // React — React Cyan
+  "#000000", // Next.js — Monochrome Black (accent #ffffff)
+  "#3178c6", // TypeScript — TypeScript Blue
+  "#f7df1e", // JavaScript — Sunshine Yellow
+  "#38bdf8", // Tailwind CSS — Sky Blue
+  "#54c5f8", // Flutter — Sky Blue (to #01579b)
+  "#0175c2", // Dart — Blue (accent #00d2b8)
+  "#ff2d20", // Laravel — Artisan Red
+  "#339933", // Node.js — Forest Green (accent #68a063)
+  "#303030", // Express.js — Charcoal
+  "#f38020", // Cloudflare Pages — Cloudflare Orange
+  "#000000", // Vercel — Pitch Black
+  "#f05032", // Git — Vermilion
+  "#181717", // GitHub — Invertocat Black
+  "#ff6c37", // Postman — Postman Orange
+  "#0099ff", // Laragon — Dodger Blue
 ];
+// Caps whose brand colour is too dark for its own logo get a light legend plate.
+const keycapLuminance = (hex) => {
+  const channel = (value) => {
+    const c = parseInt(value, 16) / 255;
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  };
+  return 0.2126 * channel(hex.slice(1, 3)) + 0.7152 * channel(hex.slice(3, 5)) + 0.0722 * channel(hex.slice(5, 7));
+};
+const keycapPlate = keycapColors.map((hex) => keycapLuminance(hex) < 0.42);
 
 const fallbackLayout = [
   [["tech", 2, 0], ["tech", 2, 1], ["tech", 2, 2], ["tech", 2, 3], ["tech", 2, 4], ["tech", 2, 5]],
@@ -85,11 +111,12 @@ fallbackLayout.forEach((row) => {
       cap.type = "button";
       cap.dataset.tech = techIndex;
       cap.style.setProperty("--assembly-delay", `${0.84 + techIndex * 0.11}s`);
-      cap.setAttribute("aria-label", `Lihat teknologi ${tech.name}`);
+      cap.setAttribute("aria-label", `View ${tech.name}`);
       cap.setAttribute("aria-pressed", String(techIndex === 0));
       cap.style.setProperty("--tech-color", tech.color);
       cap.style.setProperty("--cap-color", keycapColors[techIndex]);
-      cap.innerHTML = `${capArtwork()}<span class="fallback-surface"><span class="fallback-logo">${window.TechStackLogos.markup(tech.name)}</span><span class="fallback-number">${String(techIndex + 1).padStart(2, "0")}</span></span>`;
+      cap.classList.add("fallback-plate");
+      cap.innerHTML = `${capArtwork()}<span class="fallback-surface"><span class="fallback-plate-plate" aria-hidden="true"></span><span class="fallback-logo">${window.TechStackLogos.markup(tech.name)}</span><span class="fallback-number">${String(techIndex + 1).padStart(2, "0")}</span></span>`;
     } else {
       cap.setAttribute("aria-hidden", "true");
       cap.innerHTML = `${capArtwork()}<span class="fallback-surface">${label || ""}</span>`;

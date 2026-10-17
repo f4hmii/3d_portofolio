@@ -13,6 +13,8 @@ const filesToCopy = [
   "index.html",
   "style.css",
   "technologies.css",
+  "workflow.css",
+  "initiate.css",
   "contact.css",
   "about.js",
   "technologies.js",
@@ -21,6 +23,8 @@ const filesToCopy = [
   "fallback.js",
   "script.js",
   "scroll-motion.js",
+  "project-carousel.js",
+  "workflow.js",
   "contact.js",
 ];
 
@@ -31,7 +35,7 @@ for (const file of filesToCopy) {
   }
 }
 
-const dirsToCopy = ["assets", "vendor"];
+const dirsToCopy = ["assets", "image_asset", "vendor"];
 for (const dir of dirsToCopy) {
   const src = path.join(root, dir);
   if (fs.existsSync(src)) {

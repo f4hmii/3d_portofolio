@@ -2,3 +2,7 @@ node_modules/
 dist/
 .DS_Store
 Thumbs.db
+# local verification scripts
+_*_check.cjs
+_shot*.cjs
+_harness.html

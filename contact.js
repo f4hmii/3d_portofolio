@@ -49,7 +49,7 @@
       const formData = new FormData(contactForm);
       const name = (formData.get("name") || "").toString().trim();
       const email = (formData.get("email") || "").toString().trim();
-      const service = (formData.get("service") || "Proyek Baru").toString().trim();
+      const service = (formData.get("service") || "New Project").toString().trim();
       const message = (formData.get("message") || "").toString().trim();
 
       const subject = encodeURIComponent(`[Kolaborasi - ${service}] dari ${name || "Klien"}`);

@@ -4,6 +4,7 @@
   const about = document.querySelector("#about");
   const aboutGrid = about?.querySelector(".about-grid");
   const technologyDock = document.querySelector("#technology-monitor-dock");
+  const technologyHeading = document.querySelector(".technologies-heading");
   const monitorJourney = document.querySelector("#monitor-portal-journey");
   const monitorPage = document.querySelector("#monitor-portal-page");
   const experiencePage = document.querySelector("#experience-projects");
@@ -73,17 +74,32 @@
     const aboutPositionProgress = clamp(aboutProgress / 0.84, 0, 1);
     const transferStart = aboutTop;
     const technologyRect = technologyDock.getBoundingClientRect();
-    const transferEnd = Math.max(transferStart + 1,
-      technologyRect.top + scrollY + technologyRect.height / 2 - window.innerHeight * 0.52);
+    // Rest position: anchor the section 03 eyebrow/heading near the top of the
+    // viewport so the label, heading, paragraph and the workstation all stay
+    // visible together, regardless of viewport height.
+    const technologyHeadingTop = (technologyHeading ?? technologyDock).getBoundingClientRect().top + scrollY;
+    const technologyRestTopPad = Math.min(96, Math.max(48, window.innerHeight * 0.085));
+    const transferEnd = Math.max(transferStart + 1, technologyHeadingTop - technologyRestTopPad);
     const technologyProgress = clamp((scrollY - transferStart) / (transferEnd - transferStart), 0, 1);
     const journeyTop = monitorJourney.getBoundingClientRect().top + scrollY;
-    const portalStart = Math.max(transferEnd + window.innerHeight * 0.18, journeyTop - window.innerHeight * 0.65);
-    const portalEnd = journeyTop + window.innerHeight * 0.6;
+    // Zoom into the monitor starts right at the rest position (no dead zone),
+    // but the monitor page itself is only revealed once the sticky journey has
+    // reached the top of the viewport, so it never appears mid-scroll.
+    const portalStart = transferEnd;
+    const revealLeadRange = Math.max(0, (journeyTop - portalStart) / 0.9);
+    const portalEnd = portalStart + Math.max(
+      window.innerHeight * 0.9,
+      revealLeadRange + window.innerHeight * 0.05,
+    );
     const monitorZoomProgress = clamp((scrollY - portalStart) / Math.max(1, portalEnd - portalStart), 0, 1);
     const pageReveal = smooth(clamp((monitorZoomProgress - 0.9) / 0.08, 0, 1));
-    const experienceStart = journeyTop + window.innerHeight * 1.08;
-    const experienceEnd = journeyTop + window.innerHeight * 1.95;
-    const experienceProgress = smooth(clamp((scrollY - experienceStart) / (experienceEnd - experienceStart), 0, 1));
+    // Experience (SELECTED WORKS) page: takes over right after the CAPABILITIES
+    // monitor screen. The experience page is the second sticky child, so it
+    // parks at the top of the viewport at 1.0vh; fade it in from there and the
+    // monitor screen fades out in the same window (crossfade, no dead scroll).
+    const experienceStart = journeyTop + window.innerHeight * 1.0;
+    const experienceEnd   = journeyTop + window.innerHeight * 1.7;
+    const experienceProgress = smooth(clamp((scrollY - experienceStart) / Math.max(1, experienceEnd - experienceStart), 0, 1));
     const source = slot.getBoundingClientRect();
     const aboutRect = about.getBoundingClientRect();
     const aboutSectionProgress = clamp(-aboutRect.top / Math.max(1, aboutRect.height), 0, 1);
@@ -98,7 +114,12 @@
     const aboutCenterX = aboutLeft + aboutWidth / 2;
     const aboutCenterY = aboutTopPosition + aboutHeight / 2;
     const technologyCenterX = technologyRect.left + technologyRect.width / 2;
-    const technologyCenterY = technologyRect.top + technologyRect.height / 2;
+    // Locked resting pose: the on-screen centre of the section 03 dock at the
+    // exact scroll position where the workstation parks (scrollY === transferEnd).
+    // The dock's viewport rect moves with the page, so this is expressed in
+    // absolute page coordinates and only converted back at the rest pose.
+    const restCenterX = technologyCenterX;
+    const restCenterY = technologyRect.top + scrollY - transferEnd + technologyRect.height / 2;
     const technologyWidth = Math.max(180, technologyRect.width * 0.96);
     const technologyHeight = Math.max(180, technologyRect.height * 0.94);
     const aboutScale = Math.min(aboutWidth / source.width, aboutHeight / source.height);
@@ -116,14 +137,20 @@
       scale = 1 + (aboutScale - 1) * progress;
     } else {
       const progress = smooth(technologyProgress);
-      centerX = aboutCenterX + (technologyCenterX - aboutCenterX) * progress;
-      centerY = aboutCenterY + (technologyCenterY - aboutCenterY) * progress;
+      centerX = aboutCenterX + (restCenterX - aboutCenterX) * progress;
+      centerY = aboutCenterY + (restCenterY - aboutCenterY) * progress;
       scale = aboutScale + (technologyScale - aboutScale) * progress;
       if (technologyProgress === 1) {
-        const zoom = smooth(clamp(monitorZoomProgress / 0.45, 0, 1));
+        // Zoom completes exactly as the monitor page starts to reveal, so the
+        // camera keeps moving the whole way without a static pause.
+        const zoom = smooth(clamp(monitorZoomProgress / 0.9, 0, 1));
         const fullScreenScale = window.innerWidth / source.width * (isCompact ? 0.98 : 1.02);
+        // Interpolate toward the fullscreen framing STARTING FROM the locked
+        // rest pose. With zoom === 0 every term is a no-op, so the workstation
+        // holds its resting position exactly and never snaps/jumps (or drifts
+        // with the page) when the zoom phase begins.
         centerX += (window.innerWidth / 2 - centerX) * zoom;
-        centerY = window.innerHeight * (0.52 - 0.02 * zoom);
+        centerY += (window.innerHeight * (0.52 - 0.02 * zoom) - centerY) * zoom;
         scale += (fullScreenScale - scale) * zoom;
       }
     }
@@ -147,41 +174,17 @@
     stage.style.transform = `scale(${scale})`;
     stage.style.opacity = String(1 - pageReveal);
     stage.style.visibility = monitorZoomProgress >= 0.98 ? "hidden" : "visible";
-    // Monitor exit (zoom-out from monitor screen into workspace)
-    const monitorExitScale = 1 - (isCompact ? 0.46 : 0.54) * experienceProgress;
-    const monitorExitY = -35 * experienceProgress;
-    const monitorExitRotateX = -5.5 * experienceProgress;
-    const monitorExitFade = smooth(clamp((experienceProgress - 0.52) / 0.44, 0, 1));
-    const monitorBezelProgress = smooth(clamp(experienceProgress / 0.32, 0, 1));
+    // Monitor page (CAPABILITIES) fades out as the SELECTED WORKS page takes over.
+    const monitorExitFade = experienceProgress;
 
-    if (experienceProgress > 0.002) {
-      const bezelRadius = Math.round(monitorBezelProgress * (isCompact ? 16 : 28));
-      const bezelBorder = Math.round(monitorBezelProgress * (isCompact ? 7 : 14));
-      const outerRim = Math.round(bezelBorder + monitorBezelProgress * (isCompact ? 4 : 8));
-      const shadowY = Math.round(monitorBezelProgress * 32);
-      const shadowBlur = Math.round(monitorBezelProgress * 75);
-      const shadowSpread = Math.round(monitorBezelProgress * 8);
-      const glowBlur = Math.round(monitorBezelProgress * 55);
-
-      monitorPage.style.borderRadius = `${bezelRadius}px`;
-      monitorPage.style.border = `${bezelBorder}px solid #161b14`;
-      monitorPage.style.boxShadow = `0 0 0 ${outerRim - bezelBorder}px #263020, 0 ${shadowY}px ${shadowBlur}px ${shadowSpread}px rgba(0,0,0,0.88), 0 0 ${glowBlur}px rgba(185,239,131,0.2)`;
-      monitorPage.style.setProperty("--monitor-bezel-indicator", String(monitorBezelProgress));
-    } else {
-      monitorPage.style.removeProperty("border-radius");
-      monitorPage.style.removeProperty("border");
-      monitorPage.style.removeProperty("box-shadow");
-      monitorPage.style.setProperty("--monitor-bezel-indicator", "0");
-    }
-
-    monitorPage.style.transform = `perspective(1200px) translate3d(0, ${monitorExitY}px, 0) scale(${monitorExitScale}) rotateX(${monitorExitRotateX}deg)`;
+    monitorPage.style.transform = `perspective(1200px) translate3d(0, 0, 0) scale(1) rotateX(0deg)`;
     monitorPage.style.opacity = String(pageReveal * (1 - monitorExitFade));
     monitorPage.style.visibility = (monitorZoomProgress < 0.9 || experienceProgress >= 0.98) ? "hidden" : "visible";
     monitorPage.style.pointerEvents = (monitorZoomProgress >= 0.98 && experienceProgress < 0.55) ? "auto" : "none";
     monitorPage.inert = monitorZoomProgress < 0.98 || experienceProgress >= 0.55;
     monitorPage.setAttribute("aria-hidden", String(monitorPage.inert));
 
-    // Experience & Projects section entrance
+    // Experience (WORKFLOW) section entrance
     const experienceReveal = smooth(clamp(experienceProgress / 0.55, 0, 1));
     const experienceScale = 0.91 + 0.09 * experienceProgress;
     const experienceY = (1 - experienceProgress) * 35;
