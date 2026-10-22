@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="loader.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="technologies.css" />
     <link rel="stylesheet" href="workflow.css" />
@@ -217,6 +218,26 @@
     </noscript>
   </head>
   <body>
+    <!-- ═══ Loading Screen ═══ -->
+    <div class="site-loader" id="site-loader" role="status" aria-live="polite" aria-label="Memuat halaman">
+      <span class="loader-wordmark">ZUL<span class="loader-accent">FAHMI</span></span>
+      <span class="loader-subtitle">PORTFOLIO &bull; DEVELOPER</span>
+      <div class="loader-progress-wrap">
+        <div class="loader-track">
+          <div class="loader-fill" id="loader-fill"></div>
+        </div>
+        <div class="loader-info">
+          <span class="loader-status" id="loader-status"><span class="loader-dot"></span>MEMPERSIAPKAN</span>
+          <span class="loader-percent" id="loader-percent">0%</span>
+        </div>
+      </div>
+      <div class="loader-coordinates">
+        <span>BANDUNG, WEST JAVA</span>
+        <span class="coord-dot"></span>
+        <span>06&deg;55' S &nbsp; 107&deg;36' E</span>
+      </div>
+    </div>
+
     <div class="grain" aria-hidden="true"></div>
     <header class="topbar is-collapsed">
       <a class="wordmark" href="#home" aria-label="ZULFAHMI, home">ZULFAHMI</a>
@@ -792,36 +813,45 @@
             <span class="initiate-topline-note">INITIATE A PROJECT</span>
           </div>
 
-          <div class="initiate-panel">
-            <p class="initiate-kicker">OPEN FOR NEW ENGAGEMENTS</p>
-            <h2 class="initiate-title" id="initiate-title">Ready to build working software?</h2>
-            <p class="initiate-copy">Let us talk architecture, execution, and how we can bring your next product to life.</p>
+          <div class="initiate-panel initiate-panel--split">
+            <!-- ── Kolom kiri: keyboard 3D dekoratif ── -->
+            <div class="initiate-keyboard-wrap" aria-hidden="true">
+              <canvas id="contact-keyboard-canvas" class="contact-keyboard-canvas"></canvas>
+            </div>
 
-            <ul class="initiate-actions" aria-label="Ways to get in touch">
-              <li>
-                <a class="initiate-pill is-primary" href="mailto:zulfahmi@zulfahmi.web.id">
-                  <span>SEND AN EMAIL</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
-                </a>
-              </li>
-              <li>
-                <a class="initiate-pill" href="https://www.linkedin.com/in/zulfahmi-2b6561325" target="_blank" rel="noopener noreferrer">
-                  <span>CONNECT ON LINKEDIN</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
-                </a>
-              </li>
-              <li>
-                <a class="initiate-pill" href="https://github.com/f4hmii" target="_blank" rel="noopener noreferrer">
-                  <span>EXPLORE GITHUB</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
-                </a>
-              </li>
-              <li>
-                <a class="initiate-pill" href="assets/resume/zulfahmi-resume.pdf" download="zulfahmi-resume.pdf">
-                  <span>DOWNLOAD RESUME</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
-                </a>
-              </li>
-            </ul>
+            <!-- ── Kolom kanan: teks & CTA ── -->
+            <div class="initiate-content">
+              <p class="initiate-kicker">OPEN FOR NEW ENGAGEMENTS</p>
+              <h2 class="initiate-title" id="initiate-title">Ready to build working software?</h2>
+              <p class="initiate-copy">Let us talk architecture, execution, and how we can bring your next product to life.</p>
+
+              <ul class="initiate-actions" aria-label="Ways to get in touch">
+                <li>
+                  <a class="initiate-pill is-primary" href="mailto:zulfahmi@zulfahmi.web.id">
+                    <span>SEND AN EMAIL</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="initiate-pill" href="https://www.linkedin.com/in/zulfahmi-2b6561325" target="_blank" rel="noopener noreferrer">
+                    <span>CONNECT ON LINKEDIN</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="initiate-pill" href="https://github.com/f4hmii" target="_blank" rel="noopener noreferrer">
+                    <span>EXPLORE GITHUB</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="initiate-pill" href="assets/resume/zulfahmi-resume.pdf" download="zulfahmi-resume.pdf">
+                    <span>DOWNLOAD RESUME</span><span class="initiate-pill-glyph" aria-hidden="true">&#8599;</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
+
 
     </main>
 
@@ -846,6 +876,7 @@
       </div>
     </footer>
 
+    <script src="loader.js"></script>
     <script src="about.js"></script>
     <script src="technologies.js"></script>
     <script src="tech-logos.js"></script>
@@ -856,6 +887,7 @@
     <script src="scroll-motion.js"></script>
     <script src="project-carousel.js"></script>
     <script src="workflow.js"></script>
+    <script src="contact-keyboard.js"></script>
     <script>
       (function() {
         const rotator = document.querySelector('.role-rotator');

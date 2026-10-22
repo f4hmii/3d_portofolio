@@ -1,0 +1,236 @@
+/* ─── Loading Screen ─── */
+/*
+ * PENTING: CSS ini HANYA mengatur elemen loader itu sendiri.
+ * Tidak ada opacity/visibility/overflow yang diset pada <main>, <header>, atau <footer>
+ * karena itu akan merusak:
+ *   - position:sticky pada .monitor-portal-page dan .experience-page
+ *   - position:fixed pada #keyboard-stage (diatur oleh scroll-motion.js)
+ *   - Kalkulasi getBoundingClientRect() di scroll-motion.js
+ * Loader sudah position:fixed z-index:9999 sehingga konten di baliknya
+ * tidak perlu disembunyikan — pengguna tidak akan melihatnya.
+ */
+
+.site-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #0c0e0b;
+  transition: opacity .6s cubic-bezier(.4,0,.2,1), visibility .6s;
+  will-change: opacity;
+}
+
+.site-loader.is-finished {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Grain overlay on the loader */
+.site-loader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.93' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
+}
+
+/* Subtle radial glow */
+.site-loader::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(198,238,104,.06) 0%, transparent 70%);
+  pointer-events: none;
+  animation: loader-pulse-bg 3s ease-in-out infinite alternate;
+}
+
+@keyframes loader-pulse-bg {
+  0%   { transform: scale(.85); opacity: .5; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Logo / wordmark */
+.loader-wordmark {
+  position: relative;
+  z-index: 1;
+  color: #f0f2e9;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  margin-bottom: 8px;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: loader-fade-in .7s cubic-bezier(.4,0,.2,1) .15s forwards;
+}
+
+.loader-wordmark .loader-accent {
+  color: #c6ee68;
+}
+
+@keyframes loader-fade-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtitle line */
+.loader-subtitle {
+  position: relative;
+  z-index: 1;
+  color: #82897b;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 44px;
+  opacity: 0;
+  animation: loader-fade-in .6s cubic-bezier(.4,0,.2,1) .35s forwards;
+}
+
+/* Progress track */
+.loader-progress-wrap {
+  position: relative;
+  z-index: 1;
+  width: clamp(200px, 28vw, 320px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  animation: loader-fade-in .5s cubic-bezier(.4,0,.2,1) .55s forwards;
+}
+
+.loader-track {
+  width: 100%;
+  height: 3px;
+  background: #1e211b;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loader-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #9abf50, #c6ee68, #d4f583);
+  box-shadow: 0 0 18px rgba(198,238,104,.35);
+  transition: width .25s cubic-bezier(.4,0,.2,1);
+  position: relative;
+}
+
+.loader-fill::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c6ee68;
+  box-shadow: 0 0 12px rgba(198,238,104,.7), 0 0 28px rgba(198,238,104,.3);
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+.site-loader.is-finished .loader-fill::after {
+  opacity: 0;
+}
+
+/* Percentage text */
+.loader-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+.loader-percent {
+  color: #c6ee68;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  min-width: 38px;
+  text-align: right;
+}
+
+.loader-status {
+  color: #62695b;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* Dot indicator */
+.loader-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c6ee68;
+  box-shadow: 0 0 10px rgba(198,238,104,.6);
+  margin-right: 8px;
+  animation: loader-dot-blink 1s ease-in-out infinite alternate;
+}
+
+@keyframes loader-dot-blink {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: .3; transform: scale(.7); }
+}
+
+/* Bottom coordinates (matching site style) */
+.loader-coordinates {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  color: #4a5044;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: .12em;
+  opacity: 0;
+  animation: loader-fade-in .5s cubic-bezier(.4,0,.2,1) .7s forwards;
+}
+
+.loader-coordinates .coord-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #c6ee68;
+  box-shadow: 0 0 8px rgba(198,238,104,.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-loader,
+  .loader-wordmark,
+  .loader-subtitle,
+  .loader-progress-wrap,
+  .loader-coordinates,
+  .loader-fill {
+    animation: none !important;
+    transition-duration: 0s !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .site-loader::after {
+    animation: none;
+  }
+}

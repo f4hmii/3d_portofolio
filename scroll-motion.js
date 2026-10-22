@@ -51,6 +51,7 @@
       monitorPage.style.removeProperty("border");
       monitorPage.style.removeProperty("box-shadow");
       monitorPage.style.removeProperty("visibility");
+      monitorPage.style.removeProperty("z-index");
       monitorPage.style.removeProperty("--monitor-bezel-indicator");
       monitorPage.inert = false;
       monitorPage.setAttribute("aria-hidden", "false");
@@ -58,6 +59,7 @@
       experiencePage.style.removeProperty("pointer-events");
       experiencePage.style.removeProperty("transform");
       experiencePage.style.removeProperty("visibility");
+      experiencePage.style.removeProperty("z-index");
       experiencePage.inert = false;
       experiencePage.setAttribute("aria-hidden", "false");
       aboutGrid.style.removeProperty("--about-workspace-height");
@@ -174,23 +176,54 @@
     stage.style.transform = `scale(${scale})`;
     stage.style.opacity = String(1 - pageReveal);
     stage.style.visibility = monitorZoomProgress >= 0.98 ? "hidden" : "visible";
-    // Monitor page (CAPABILITIES) fades out as the SELECTED WORKS page takes over.
+    // ── CAPABILITIES menutup seperti layar monitor dengan bingkai PC ──────────
     const monitorExitFade = experienceProgress;
+    const exitSmooth      = smooth(clamp(monitorExitFade, 0, 1));
 
-    monitorPage.style.transform = `perspective(1200px) translate3d(0, 0, 0) scale(1) rotateX(0deg)`;
-    monitorPage.style.opacity = String(pageReveal * (1 - monitorExitFade));
-    monitorPage.style.visibility = (monitorZoomProgress < 0.9 || experienceProgress >= 0.98) ? "hidden" : "visible";
+    // Skala berkurang → layar "menyusut masuk ke bingkai"
+    const exitScale  = 1 - exitSmooth * 0.13;
+    // Border-radius bertambah → sudut bingkai monitor PC muncul
+    const exitRadius = Math.round(exitSmooth * 22);
+    // Box-shadow berlapis → bingkai / bezel monitor
+    const bIn  = Math.round(exitSmooth * 5);
+    const bOut = Math.round(exitSmooth * 22);
+    const bezelFrame = exitSmooth > 0.02
+      ? `0 0 0 ${bIn}px #090e08, 0 0 0 ${bOut}px #182616, 0 0 0 ${bOut + 4}px #0e190d, 0 30px 100px rgba(0,0,0,.85)`
+      : '';
+    // Opacity tertunda: konten tetap jelas selagi bezel terbentuk,
+    // baru memudar di 62% terakhir transisi
+    const opacityPhase = smooth(clamp((monitorExitFade - 0.38) / 0.62, 0, 1));
+
+    // Paksa z-index lewat JS agar CAPABILITIES selalu di atas SELECTED WORKS
+    monitorPage.style.zIndex     = '3';
+    experiencePage.style.zIndex  = '2';
+
+    monitorPage.style.transform    = `perspective(1200px) translate3d(0, 0, 0) scale(${exitScale})`;
+    monitorPage.style.borderRadius = exitRadius > 0 ? `${exitRadius}px` : '';
+    monitorPage.style.boxShadow    = bezelFrame;
+    // Indikator bezel bawah muncul saat monitor menutup
+    monitorPage.style.setProperty('--monitor-bezel-indicator',
+      String(smooth(clamp(monitorExitFade * 2.5, 0, 1))));
+    monitorPage.style.opacity      = String(pageReveal * (1 - opacityPhase));
+    monitorPage.style.visibility   = (monitorZoomProgress < 0.9 || experienceProgress >= 0.98) ? "hidden" : "visible";
+    // Bersihkan efek bezel setelah transisi selesai
+    if (experienceProgress >= 0.98) {
+      monitorPage.style.borderRadius = '';
+      monitorPage.style.boxShadow    = '';
+      monitorPage.style.removeProperty('--monitor-bezel-indicator');
+    }
     monitorPage.style.pointerEvents = (monitorZoomProgress >= 0.98 && experienceProgress < 0.55) ? "auto" : "none";
     monitorPage.inert = monitorZoomProgress < 0.98 || experienceProgress >= 0.55;
     monitorPage.setAttribute("aria-hidden", String(monitorPage.inert));
 
-    // Experience (WORKFLOW) section entrance
+    // ── SELECTED WORKS naik dari belakang saat monitor menutup ───────────────
     const experienceReveal = smooth(clamp(experienceProgress / 0.55, 0, 1));
-    const experienceScale = 0.91 + 0.09 * experienceProgress;
-    const experienceY = (1 - experienceProgress) * 35;
+    // Mulai lebih kecil & lebih jauh ke bawah → kesan "dari balik layar"
+    const experienceScale  = 0.88 + 0.12 * experienceReveal;
+    const experienceY      = (1 - experienceReveal) * 55;
 
-    experiencePage.style.opacity = String(experienceReveal);
-    experiencePage.style.transform = `perspective(1200px) translate3d(0, ${experienceY}px, 0) scale(${experienceScale})`;
+    experiencePage.style.opacity    = String(experienceReveal);
+    experiencePage.style.transform  = `perspective(1200px) translate3d(0, ${experienceY}px, 0) scale(${experienceScale})`;
     experiencePage.style.visibility = experienceProgress <= 0.01 ? "hidden" : "visible";
     experiencePage.style.pointerEvents = experienceProgress >= 0.55 ? "auto" : "none";
     experiencePage.inert = experienceProgress < 0.55;

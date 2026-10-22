@@ -136,6 +136,58 @@
   list-style: none;
 }
 
+/* ---------- Split panel (3D Keyboard + Text) ---------- */
+.initiate-panel.initiate-panel--split {
+  max-width: 1140px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(24px, 3.5vw, 48px);
+  text-align: left;
+  padding: clamp(36px, 4.5vw, 56px) clamp(28px, 4vw, 52px);
+}
+
+.initiate-panel--split .initiate-content {
+  text-align: left;
+}
+
+.initiate-panel--split .initiate-title {
+  margin: 0;
+  max-width: none;
+}
+
+.initiate-panel--split .initiate-copy {
+  margin: clamp(14px, 2.2vh, 20px) 0 0;
+  max-width: 32rem;
+}
+
+.initiate-panel--split .initiate-actions {
+  justify-content: flex-start;
+  margin: clamp(24px, 3.5vh, 36px) 0 0;
+}
+
+.initiate-keyboard-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(320px, 42vh, 440px);
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 16px;
+  background: radial-gradient(circle at 50% 50%, rgba(198, 238, 104, 0.04) 0%, transparent 70%);
+}
+
+.contact-keyboard-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: auto;
+}
+
 .initiate-pill {
   display: inline-flex;
   align-items: center;
@@ -190,6 +242,30 @@
 /* ---------- Responsive ---------- */
 @media (max-width: 1180px) {
   .initiate-inner { padding-left: 6vw; padding-right: 5vw; }
+}
+
+@media (max-width: 960px) {
+  .initiate-panel.initiate-panel--split {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 32px;
+  }
+  .initiate-panel--split .initiate-content {
+    text-align: center;
+  }
+  .initiate-panel--split .initiate-title {
+    margin: 0 auto;
+    max-width: 18ch;
+  }
+  .initiate-panel--split .initiate-copy {
+    margin: clamp(14px, 2vh, 20px) auto 0;
+  }
+  .initiate-panel--split .initiate-actions {
+    justify-content: center;
+  }
+  .initiate-keyboard-wrap {
+    height: 300px;
+  }
 }
 
 @media (max-width: 760px) {

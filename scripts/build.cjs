@@ -16,6 +16,8 @@ const filesToCopy = [
   "workflow.css",
   "initiate.css",
   "contact.css",
+  "loader.css",
+  "loader.js",
   "about.js",
   "technologies.js",
   "tech-logos.js",
@@ -25,6 +27,7 @@ const filesToCopy = [
   "scroll-motion.js",
   "project-carousel.js",
   "workflow.js",
+  "contact-keyboard.js",
   "contact.js",
 ];
 
